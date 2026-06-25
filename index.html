@@ -1,0 +1,1103 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黄睿扬 Ruiyang Huang | Personal Homepage</title>
+  <meta name="description" content="黄睿扬，东南大学网络空间安全学院本科生，研究方向包括多智能体系统、无人集群系统、密码学与隐私保护、通感一体化。">
+  <style>
+    :root {
+      --paper: #fbfcfd;
+      --mist: #eef4f1;
+      --ink: #182321;
+      --muted: #5d6865;
+      --line: #dce5e1;
+      --teal: #0f766e;
+      --teal-dark: #0b4f4b;
+      --coral: #b94f4f;
+      --gold: #b58324;
+      --blue: #315c72;
+      --white: #ffffff;
+      --shadow: 0 24px 60px rgba(24, 35, 33, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Inter", "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(251, 252, 253, 0.88);
+      border-bottom: 1px solid rgba(220, 229, 225, 0.8);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      font-weight: 760;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 520;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      white-space: nowrap;
+    }
+
+    .nav-links a {
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .nav-links a:hover {
+      background: var(--mist);
+      color: var(--ink);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+        #f4f8f6;
+      background-size: 56px 56px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(115deg, rgba(251, 252, 253, 0.98) 0%, rgba(251, 252, 253, 0.84) 46%, rgba(238, 244, 241, 0.68) 100%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 48px;
+      min-height: 650px;
+      padding: 76px 0 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--teal-dark);
+      font-weight: 760;
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--coral);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      font-size: 4rem;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--teal);
+      font-size: 1.55rem;
+      line-height: 1.35;
+      font-weight: 680;
+      margin-top: 12px;
+    }
+
+    .lead {
+      color: #33403d;
+      font-size: 1.12rem;
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 15px;
+      background: var(--white);
+      color: var(--ink);
+      font-weight: 720;
+      box-shadow: 0 8px 20px rgba(24, 35, 33, 0.06);
+    }
+
+    .button.primary {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(24, 35, 33, 0.12);
+    }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--line);
+      max-width: 760px;
+    }
+
+    .metric {
+      min-height: 96px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--teal-dark);
+      font-size: 1.6rem;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .portrait-wrap {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+
+    .portrait-panel {
+      position: relative;
+      width: min(430px, 100%);
+      border: 1px solid rgba(220, 229, 225, 0.9);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .portrait-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 34%;
+      background: linear-gradient(0deg, rgba(24, 35, 33, 0.7), rgba(24, 35, 33, 0));
+      pointer-events: none;
+    }
+
+    .portrait {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .portrait-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
+      z-index: 1;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--white);
+    }
+
+    .portrait-caption strong {
+      display: block;
+      font-size: 1.1rem;
+      line-height: 1.2;
+    }
+
+    .portrait-caption span {
+      display: block;
+      font-size: 0.82rem;
+      opacity: 0.9;
+    }
+
+    .school-mark {
+      width: 86px;
+      height: 86px;
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      border-radius: 50%;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .research-map {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      width: min(480px, 100%);
+      margin-top: 18px;
+    }
+
+    .map-node {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--muted);
+      font-size: 0.92rem;
+      box-shadow: 0 10px 24px rgba(24, 35, 33, 0.06);
+    }
+
+    .map-node b {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .section {
+      padding: 82px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section.alt {
+      background: #f6f8f8;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(200px, 0.38fr) 1fr;
+      gap: 36px;
+      align-items: start;
+      margin-bottom: 32px;
+    }
+
+    .kicker {
+      color: var(--coral);
+      font-weight: 780;
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 2.35rem;
+      line-height: 1.16;
+      margin-bottom: 0;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 780px;
+      margin-bottom: 0;
+      font-size: 1.02rem;
+    }
+
+    .interest-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .interest {
+      min-height: 138px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      background: var(--white);
+    }
+
+    .interest .num {
+      color: var(--gold);
+      font-weight: 820;
+      margin-bottom: 18px;
+    }
+
+    .interest h3 {
+      margin-bottom: 8px;
+      line-height: 1.3;
+      font-size: 1.06rem;
+    }
+
+    .interest p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 0;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .highlight {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      background: var(--white);
+      min-height: 210px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: var(--mist);
+      color: var(--teal-dark);
+      font-size: 0.78rem;
+      font-weight: 780;
+      margin-bottom: 16px;
+    }
+
+    .tag.coral {
+      background: #faeeee;
+      color: var(--coral);
+    }
+
+    .tag.gold {
+      background: #fbf1dc;
+      color: var(--gold);
+    }
+
+    .tag.blue {
+      background: #e8f2f6;
+      color: var(--blue);
+    }
+
+    .highlight h3 {
+      font-size: 1.1rem;
+      line-height: 1.32;
+      margin-bottom: 12px;
+    }
+
+    .highlight p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 0;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 26px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background: var(--white);
+    }
+
+    .time {
+      color: var(--teal-dark);
+      font-weight: 820;
+    }
+
+    .timeline-item h3 {
+      margin-bottom: 8px;
+      line-height: 1.35;
+      font-size: 1.12rem;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      background: var(--white);
+    }
+
+    .panel h3 {
+      margin-bottom: 14px;
+      font-size: 1.12rem;
+    }
+
+    .edu-card {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .edu-card img {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      background: #9f9661;
+    }
+
+    .edu-card p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .fact-list,
+    .plain-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .fact-list li,
+    .plain-list li {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      color: var(--muted);
+    }
+
+    .fact-list b,
+    .plain-list b {
+      color: var(--ink);
+      min-width: 78px;
+    }
+
+    .publication-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .publication {
+      display: grid;
+      grid-template-columns: minmax(96px, 0.14fr) 1fr;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: var(--white);
+    }
+
+    .venue {
+      color: var(--teal-dark);
+      font-weight: 850;
+    }
+
+    .publication h3 {
+      margin-bottom: 8px;
+      font-size: 1.06rem;
+      line-height: 1.34;
+    }
+
+    .publication p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 0;
+    }
+
+    .honor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .honor-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background: var(--white);
+    }
+
+    .honor-card h3 {
+      margin-bottom: 14px;
+      font-size: 1.08rem;
+    }
+
+    .honor-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .honor-card li + li {
+      margin-top: 8px;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .contact-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background: var(--white);
+    }
+
+    .contact-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-card strong {
+      display: block;
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 30px 0 42px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      background: var(--paper);
+    }
+
+    @media (max-width: 920px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .hero-grid,
+      .section-head,
+      .two-col,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        min-height: auto;
+        gap: 34px;
+        padding-top: 54px;
+      }
+
+      h1 {
+        font-size: 3.1rem;
+      }
+
+      .metric-strip,
+      .interest-grid,
+      .highlight-grid,
+      .honor-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .section {
+        padding: 58px 0;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h1 span {
+        font-size: 1.2rem;
+      }
+
+      h2 {
+        font-size: 1.82rem;
+      }
+
+      .lead {
+        font-size: 1rem;
+      }
+
+      .metric-strip,
+      .interest-grid,
+      .highlight-grid,
+      .honor-grid,
+      .research-map {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item,
+      .publication,
+      .edu-card {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        min-height: 82px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="shell nav" aria-label="主导航">
+      <a class="brand" href="#top">
+        黄睿扬
+        <span>Ruiyang Huang</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">简介</a>
+        <a href="#research">研究</a>
+        <a href="#publications">成果</a>
+        <a href="#honors">荣誉</a>
+        <a href="#contact">联系</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell hero-grid">
+        <div>
+          <div class="eyebrow">SEU Cyber Science · Undergraduate Researcher</div>
+          <h1 id="hero-title">黄睿扬<span>Ruiyang Huang</span></h1>
+          <p class="lead">
+            东南大学网络空间安全学院 2023 级本科生，主修密码科学与技术。研究兴趣聚焦多智能体系统安全、无人集群系统、密码学与隐私保护、通感一体化，并在紫金山实验室、移动通信国家重点实验室、江苏省网络与信息安全重点实验室、北京大学 FineLab 等平台开展科研训练。
+          </p>
+          <div class="hero-actions" aria-label="主页链接">
+            <a class="button primary" href="mailto:ryhuang_572@seu.edu.cn">Email</a>
+            <a class="button" href="https://scholar.google.com/citations?user=Ei4812YAAAAJ&hl=zh-CN" target="_blank" rel="noreferrer">Google Scholar</a>
+            <a class="button" href="https://orcid.org/0009-0007-0178-8572" target="_blank" rel="noreferrer">ORCID</a>
+          </div>
+          <div class="metric-strip" aria-label="个人概览">
+            <div class="metric">
+              <strong>6</strong>
+              <span>绩点排名</span>
+            </div>
+            <div class="metric">
+              <strong>2</strong>
+              <span>综合测评排名</span>
+            </div>
+            <div class="metric">
+              <strong>36.3</strong>
+              <span>SRTP 学分</span>
+            </div>
+            <div class="metric">
+              <strong>333.5h</strong>
+              <span>志愿服务时长</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portrait-wrap">
+          <figure class="portrait-panel">
+            <img class="portrait" src="assets/profile.png" alt="黄睿扬头像">
+            <figcaption class="portrait-caption">
+              <span>
+                <strong>IEEE Student Member</strong>
+                IEEE SPS Member · ACM MM '26 Reviewer
+              </span>
+              <img class="school-mark" src="assets/seu-logo.png" alt="东南大学校徽">
+            </figcaption>
+          </figure>
+          <div class="research-map" aria-label="研究方向">
+            <div class="map-node"><b>MAS Security</b>多智能体系统中的风险传播、恶意信息阻断与故障归因</div>
+            <div class="map-node"><b>UAV Swarms</b>无人集群通信、认证、可靠性建模与拓扑优化</div>
+            <div class="map-node"><b>Cryptography</b>身份认证与密钥协商、隐私保护与威胁模型分析</div>
+            <div class="map-node"><b>ISAC</b>WiFi 通感定位、CSI/BFM 建模与射频指纹识别</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="kicker">PROFILE</div>
+            <h2>面向安全与智能系统的本科科研训练</h2>
+          </div>
+          <p>
+            目前关注高度互联系统中的安全性、可靠性与可解释诊断问题，尝试把图神经网络、密码协议分析、复杂网络建模和大语言模型结合到无人集群、多智能体系统与通感一体化场景中。
+          </p>
+        </div>
+        <div class="two-col">
+          <div class="panel">
+            <div class="edu-card">
+              <img src="assets/seu-logo.png" alt="东南大学校徽">
+              <div>
+                <h3>东南大学 Southeast University</h3>
+                <p>2024.09 至今，网络空间安全学院，密码科学与技术；2023.08-2024.09，数学学院理科试验班。</p>
+              </div>
+            </div>
+            <ul class="fact-list">
+              <li><b>身份</b><span>中共党员，紫金山实验室内生安全“五色石计划”学生成员</span></li>
+              <li><b>语言</b><span>CET-4 / CET-6：604 / 513</span></li>
+              <li><b>审稿</b><span>ACM MM '26 及其 Dataset Track 审稿人</span></li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>代表课程</h3>
+            <ul class="plain-list">
+              <li><b>数学</b><span>工科数学分析 I/II，高等代数与解析几何 I/II</span></li>
+              <li><b>编程</b><span>C++ 程序设计，计算机语言课程设计</span></li>
+              <li><b>安全</b><span>信息安全数学基础，密码科学与技术相关课程</span></li>
+              <li><b>训练</b><span>多个校级重点、国家级创新创业类 SRT 项目结项优秀或良好</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="research">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="kicker">RESEARCH</div>
+            <h2>研究兴趣</h2>
+          </div>
+          <p>
+            研究问题主要从“复杂系统如何被攻击、如何被诊断、如何被优化”展开，连接密码学安全性证明、图学习、无线感知与智能体协作机制。
+          </p>
+        </div>
+        <div class="interest-grid">
+          <article class="interest">
+            <div class="num">01</div>
+            <h3>多智能体系统</h3>
+            <p>恶意信息传播、风险熵建模、动态可信锚点与故障归因。</p>
+          </article>
+          <article class="interest">
+            <div class="num">02</div>
+            <h3>无人集群系统</h3>
+            <p>UAV/USV 协同网络、可靠性评估、复杂网络重要度排序。</p>
+          </article>
+          <article class="interest">
+            <div class="num">03</div>
+            <h3>密码学与隐私保护</h3>
+            <p>HECC 认证密钥协商、eCK 敌手模型、节点捕获与临时密钥泄露。</p>
+          </article>
+          <article class="interest">
+            <div class="num">04</div>
+            <h3>通感一体化</h3>
+            <p>WiFi BFM/CSI 数据建模、STGCN 定位、射频指纹身份识别。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="kicker">HIGHLIGHTS</div>
+            <h2>近期亮点</h2>
+          </div>
+          <p>
+            以下按公开主页展示口径整理，保留已录用、已出版、在投和合作工作状态，便于访问者快速理解研究轨迹。
+          </p>
+        </div>
+        <div class="highlight-grid">
+          <article class="highlight">
+            <span class="tag">IEEE T-VT</span>
+            <h3>基于 HECC 的无人机 AKA 协议</h3>
+            <p>第一作者，针对 eCK 威胁模型下的节点捕获与临时密钥泄露风险，设计并证明安全的认证密钥协商方案。</p>
+          </article>
+          <article class="highlight">
+            <span class="tag blue">ICASSP '26</span>
+            <h3>WiFi 通感定位与身份识别</h3>
+            <p>第一作者，基于 BFM/CSI 数据、时空图建模与射频指纹进行室内定位和身份识别。</p>
+          </article>
+          <article class="highlight">
+            <span class="tag coral">ACL Findings '26</span>
+            <h3>风险驱动的 MAS 恶意信息阻断</h3>
+            <p>第一作者，利用图神经网络监测交互动态，并通过分层拓扑优化抑制恶意传播。</p>
+          </article>
+          <article class="highlight">
+            <span class="tag gold">ICML '26</span>
+            <h3>高效可进化 LLM 代理工具编排</h3>
+            <p>共同第一作者，EvoC2F 通过中间表示优化自主代理的工具编排、执行效率和可靠性。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="kicker">EXPERIENCE</div>
+            <h2>主要科研经历</h2>
+          </div>
+          <p>
+            从密码协议设计到多智能体系统安全，再到无人集群可靠性和无线通感，项目之间共享一个核心问题：在开放、复杂、动态的系统中建立可信运行机制。
+          </p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="time">2025.10-Now</div>
+            <div>
+              <h3>协同 GNN 与 LLM 强化 MAS 中的故障归因</h3>
+              <p>将执行轨迹建模为动态异质因果图，通过 STGAT 缩小可疑范围，再由 SFT-LLM 对候选节点进行语义验证；同时提出 PolyGen 自动化故障样本生成管道。</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="time">2025.07-2026.04</div>
+            <div>
+              <h3>基于风险驱动的 MAS 恶意信息阻断与重塑</h3>
+              <p>构建面向 LLM-MAS 的安全防御框架，利用节点风险熵和边攻击传导性识别脆弱点，执行剪枝、隔离与社区传播阻断。</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="time">2024.10-2026.04</div>
+            <div>
+              <h3>WiFi 通感定位与身份识别一体化研究</h3>
+              <p>围绕公开明文信道信息可能遭受重放与伪造攻击的问题，采集 CSI/BFM 数据，构建天线对时空图，并结合 STGCN 与射频指纹完成定位和识别。</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="time">2024.10-2026.04</div>
+            <div>
+              <h3>多重攻击下空海协同无人集群可靠性评估</h3>
+              <p>提出“通信-结构-任务”三层模型、结构化敌手模型、SurBi-Rank 重要度评估方法，并结合 NSGA-III 与熵权 TOPSIS 进行拓扑优化。</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="time">2024.01-2025.03</div>
+            <div>
+              <h3>基于 HECC 的无人机身份认证与密钥协商协议</h3>
+              <p>分析 baseline 协议在 eCK 敌手模型下的安全问题，给出攻击路径，并设计可抵御 Node-Capture 与 ESL 攻击的 AKA 协议。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="kicker">PUBLICATIONS</div>
+            <h2>成果与合作工作</h2>
+          </div>
+          <p>
+            这里以简历中的公开状态为准，侧重展示研究主题、作者贡献和目标场景。后续可以继续补充论文题目、DOI、arXiv 链接与代码仓库。
+          </p>
+        </div>
+        <div class="publication-list">
+          <article class="publication">
+            <div class="venue">T-VT</div>
+            <div>
+              <h3>HECC-based authentication and key agreement for UAV systems</h3>
+              <p>第一作者，IEEE Transactions on Vehicular Technology，已录用并出版。</p>
+            </div>
+          </article>
+          <article class="publication">
+            <div class="venue">ICASSP '26</div>
+            <div>
+              <h3>WiFi sensing, localization and identity recognition with CSI/BFM modeling</h3>
+              <p>第一作者，IEEE International Conference on Acoustics, Speech, and Signal Processing，已录用并出版。</p>
+            </div>
+          </article>
+          <article class="publication">
+            <div class="venue">ACL '26</div>
+            <div>
+              <h3>Risk-driven malicious information blocking and reshaping in LLM-based MAS</h3>
+              <p>第一作者，The Annual Meeting of the Association for Computational Linguistics，Findings 录用。</p>
+            </div>
+          </article>
+          <article class="publication">
+            <div class="venue">ICML '26</div>
+            <div>
+              <h3>EvoC2F: efficient and evolvable tool orchestration for LLM agents</h3>
+              <p>共同第一作者，International Conference on Machine Learning，已录用。</p>
+            </div>
+          </article>
+          <article class="publication">
+            <div class="venue">ICMR '26</div>
+            <div>
+              <h3>Procedural synthetic audio pretraining without real data dependency</h3>
+              <p>第二作者，ACM International Conference on Multimedia Retrieval，已录用；扩展期刊论文投稿 IEEE T-ASLP。</p>
+            </div>
+          </article>
+          <article class="publication">
+            <div class="venue">ICIC '25</div>
+            <div>
+              <h3>Spherical-vector particle swarm optimization for UAV swarm path planning</h3>
+              <p>第三作者，International Conference On Intelligent Computing，已录用并出版。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="honors">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="kicker">HONORS</div>
+            <h2>奖项与竞赛</h2>
+          </div>
+          <p>
+            除科研训练外，也持续参与创新创业、信息安全竞赛和志愿服务，覆盖国家级、省级与校级成果。
+          </p>
+        </div>
+        <div class="honor-grid">
+          <article class="honor-card">
+            <h3>奖学金与荣誉</h3>
+            <ul>
+              <li>2024 年策腾智能奖学金</li>
+              <li>2024 年东南大学“至善学子”奖学金</li>
+              <li>2026 年优秀共青团员</li>
+              <li>2023、2025 年东南大学单项奖</li>
+            </ul>
+          </article>
+          <article class="honor-card">
+            <h3>志愿服务</h3>
+            <ul>
+              <li>2023、2024 年江苏省优秀志愿者</li>
+              <li>2024 年东南大学校级优秀志愿者</li>
+              <li>东南大学五星级志愿者</li>
+            </ul>
+          </article>
+          <article class="honor-card">
+            <h3>创新竞赛</h3>
+            <ul>
+              <li>2024 年中国国际大学生创新大赛国家级铜奖</li>
+              <li>2025 年全国大学生信息安全竞赛作品赛国家级二等奖</li>
+              <li>2025 年“建行杯”江苏大学生创新大赛省级二等奖</li>
+              <li>2026 年华东师范大学“挑战杯”选拔赛金奖</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="kicker">CONTACT</div>
+            <h2>联系与链接</h2>
+          </div>
+          <p>
+            欢迎围绕多智能体系统安全、无人集群可靠性、密码协议设计、无线通感与智能体工具编排等方向交流。
+          </p>
+        </div>
+        <div class="contact">
+          <a class="contact-card" href="mailto:ryhuang_572@seu.edu.cn">
+            <span>School Email</span>
+            <strong>ryhuang_572@seu.edu.cn</strong>
+          </a>
+          <a class="contact-card" href="mailto:NoWall_572@outlook.com">
+            <span>Personal Email</span>
+            <strong>NoWall_572@outlook.com</strong>
+          </a>
+          <a class="contact-card" href="https://scholar.google.com/citations?user=Ei4812YAAAAJ&hl=zh-CN" target="_blank" rel="noreferrer">
+            <span>Google Scholar</span>
+            <strong>scholar.google.com/citations</strong>
+          </a>
+          <a class="contact-card" href="https://orcid.org/0009-0007-0178-8572" target="_blank" rel="noreferrer">
+            <span>ORCID</span>
+            <strong>0009-0007-0178-8572</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <span>© 2026 Ruiyang Huang. Built for GitHub Pages from resume materials.</span>
+    </div>
+  </footer>
+</body>
+</html>
