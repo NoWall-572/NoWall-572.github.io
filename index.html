@@ -7,18 +7,20 @@
   <meta name="description" content="黄睿扬，东南大学网络空间安全学院本科生，研究方向包括多智能体系统、无人集群系统、密码学与隐私保护、通感一体化。">
   <style>
     :root {
-      --paper: #fbfcfd;
-      --mist: #eef4f1;
-      --ink: #182321;
-      --muted: #5d6865;
-      --line: #dce5e1;
-      --teal: #0f766e;
-      --teal-dark: #0b4f4b;
-      --coral: #b94f4f;
-      --gold: #b58324;
-      --blue: #315c72;
+      --paper: #fbfbf7;
+      --mist: #f1f5ef;
+      --ink: #231815;
+      --muted: #68605a;
+      --line: rgba(180, 183, 185, 0.48);
+      --teal: #587558;
+      --teal-dark: #3f5d45;
+      --coral: #f6ab00;
+      --gold: #fdd000;
+      --blue: #151e49;
+      --sand: #ad986e;
+      --gray: #b4b7b9;
       --white: #ffffff;
-      --shadow: 0 24px 60px rgba(24, 35, 33, 0.12);
+      --shadow: 0 24px 60px rgba(35, 24, 21, 0.12);
     }
 
     * {
@@ -31,7 +33,9 @@
 
     body {
       margin: 0;
-      background: var(--paper);
+      background:
+        linear-gradient(180deg, rgba(88, 117, 88, 0.035), transparent 420px),
+        var(--paper);
       color: var(--ink);
       font-family: "Inter", "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
       line-height: 1.65;
@@ -56,9 +60,20 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(251, 252, 253, 0.88);
-      border-bottom: 1px solid rgba(220, 229, 225, 0.8);
+      background: rgba(251, 251, 247, 0.9);
+      border-bottom: 1px solid rgba(180, 183, 185, 0.55);
       backdrop-filter: blur(16px);
+    }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal) 0 44%, var(--gold) 44% 62%, var(--blue) 62% 82%, var(--sand) 82% 100%);
+      opacity: 0.9;
     }
 
     .nav {
@@ -71,12 +86,28 @@
 
     .brand {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 10px;
       line-height: 1.2;
       font-weight: 760;
     }
 
-    .brand span {
+    .brand-emblem {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text strong {
+      font-size: 1rem;
+    }
+
+    .brand-text span {
       color: var(--muted);
       font-size: 0.82rem;
       font-weight: 520;
@@ -106,9 +137,9 @@
       overflow: hidden;
       border-bottom: 1px solid var(--line);
       background:
-        linear-gradient(90deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px),
-        #f4f8f6;
+        linear-gradient(90deg, rgba(88, 117, 88, 0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(88, 117, 88, 0.08) 1px, transparent 1px),
+        #f4f7f1;
       background-size: 56px 56px;
     }
 
@@ -117,12 +148,51 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(115deg, rgba(251, 252, 253, 0.98) 0%, rgba(251, 252, 253, 0.84) 46%, rgba(238, 244, 241, 0.68) 100%);
+        linear-gradient(115deg, rgba(251, 251, 247, 0.98) 0%, rgba(251, 251, 247, 0.86) 46%, rgba(241, 245, 239, 0.7) 100%);
+      z-index: 0;
       pointer-events: none;
+    }
+
+    .campus-silhouette {
+      position: absolute;
+      right: max(-24px, calc((100vw - 1280px) / 2));
+      bottom: -2px;
+      z-index: 0;
+      width: min(760px, 58vw);
+      opacity: 0.44;
+      pointer-events: none;
+    }
+
+    .campus-silhouette-vertical {
+      position: absolute;
+      left: max(-28px, calc((100vw - 1320px) / 2));
+      top: 104px;
+      z-index: 0;
+      width: min(210px, 18vw);
+      opacity: 0.34;
+      pointer-events: none;
+    }
+
+    .hero-watermark {
+      position: absolute;
+      top: 96px;
+      right: max(24px, calc((100vw - 1160px) / 2));
+      z-index: 0;
+      width: clamp(160px, 20vw, 300px);
+      opacity: 0.045;
+      pointer-events: none;
+    }
+
+    .hero-lockup {
+      width: min(330px, 76vw);
+      margin-bottom: 22px;
+      opacity: 0.94;
+      filter: drop-shadow(0 8px 16px rgba(35, 24, 21, 0.08));
     }
 
     .hero-grid {
       position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
       align-items: center;
@@ -172,7 +242,7 @@
     }
 
     .lead {
-      color: #33403d;
+      color: #3c3731;
       font-size: 1.12rem;
       max-width: 720px;
       margin-bottom: 28px;
@@ -189,6 +259,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       min-height: 44px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -196,7 +267,7 @@
       background: var(--white);
       color: var(--ink);
       font-weight: 720;
-      box-shadow: 0 8px 20px rgba(24, 35, 33, 0.06);
+      box-shadow: 0 8px 20px rgba(35, 24, 21, 0.06);
     }
 
     .button.primary {
@@ -207,7 +278,31 @@
 
     .button:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(24, 35, 33, 0.12);
+      box-shadow: 0 14px 28px rgba(35, 24, 21, 0.12);
+    }
+
+    .button svg {
+      width: 19px;
+      height: 19px;
+      flex: 0 0 19px;
+      stroke-width: 2;
+    }
+
+    .icon-only {
+      width: 44px;
+      padding: 0;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .metric-strip {
@@ -217,7 +312,7 @@
       overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: var(--line);
+      background: linear-gradient(90deg, var(--teal), var(--gold), var(--blue), var(--sand));
       max-width: 760px;
     }
 
@@ -240,6 +335,32 @@
       font-size: 0.9rem;
     }
 
+    .campus-band {
+      position: relative;
+      overflow: hidden;
+      height: 68px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #f4f7f1 100%);
+    }
+
+    .campus-band::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal) 0 38%, var(--gold) 38% 56%, var(--blue) 56% 76%, var(--sand) 76% 100%);
+    }
+
+    .campus-band img {
+      width: min(980px, 94vw);
+      height: 68px;
+      margin: 0 auto;
+      opacity: 0.22;
+      object-fit: contain;
+      object-position: center bottom;
+    }
+
     .portrait-wrap {
       position: relative;
       display: grid;
@@ -250,7 +371,7 @@
     .portrait-panel {
       position: relative;
       width: min(430px, 100%);
-      border: 1px solid rgba(220, 229, 225, 0.9);
+      border: 1px solid rgba(180, 183, 185, 0.45);
       border-radius: 8px;
       overflow: hidden;
       background: var(--white);
@@ -262,7 +383,7 @@
       position: absolute;
       inset: auto 0 0 0;
       height: 34%;
-      background: linear-gradient(0deg, rgba(24, 35, 33, 0.7), rgba(24, 35, 33, 0));
+      background: linear-gradient(0deg, rgba(35, 24, 21, 0.7), rgba(35, 24, 21, 0));
       pointer-events: none;
     }
 
@@ -315,6 +436,13 @@
       margin-top: 18px;
     }
 
+    .motto-mark {
+      width: min(320px, 78%);
+      margin: 20px auto 0;
+      opacity: 0.72;
+      filter: drop-shadow(0 8px 18px rgba(35, 24, 21, 0.08));
+    }
+
     .map-node {
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -322,7 +450,7 @@
       background: rgba(255, 255, 255, 0.86);
       color: var(--muted);
       font-size: 0.92rem;
-      box-shadow: 0 10px 24px rgba(24, 35, 33, 0.06);
+      box-shadow: 0 10px 24px rgba(35, 24, 21, 0.06);
     }
 
     .map-node b {
@@ -333,12 +461,117 @@
     }
 
     .section {
+      position: relative;
+      overflow: hidden;
       padding: 82px 0;
       border-bottom: 1px solid var(--line);
     }
 
+    .section > .shell {
+      position: relative;
+      z-index: 1;
+    }
+
     .section.alt {
-      background: #f6f8f8;
+      background: #f6f7f3;
+    }
+
+    .campus-mark::after {
+      content: "";
+      position: absolute;
+      top: 44px;
+      right: max(12px, calc((100vw - 1120px) / 2));
+      z-index: 0;
+      width: clamp(150px, 18vw, 250px);
+      aspect-ratio: 1 / 1;
+      background: url("assets/东南大学黑白校标.svg") center / contain no-repeat;
+      opacity: 0.035;
+      pointer-events: none;
+    }
+
+    .campus-pattern::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 12px;
+      z-index: 0;
+      height: 48px;
+      background: url("assets/大礼堂-辅助-连续.svg") center bottom / auto 42px repeat-x;
+      opacity: 0.26;
+      pointer-events: none;
+    }
+
+    .pine-mark::before {
+      content: "";
+      position: absolute;
+      left: max(-56px, calc((100vw - 1240px) / 2));
+      bottom: 8px;
+      z-index: 0;
+      width: min(420px, 36vw);
+      height: 330px;
+      background: url("assets/六朝松.svg") center / contain no-repeat;
+      opacity: 0.13;
+      pointer-events: none;
+    }
+
+    .pine-mark-right::before {
+      content: "";
+      position: absolute;
+      right: max(-42px, calc((100vw - 1260px) / 2));
+      top: 28px;
+      z-index: 0;
+      width: min(390px, 34vw);
+      height: 310px;
+      background: url("assets/六朝松.svg") center / contain no-repeat;
+      opacity: 0.12;
+      transform: scaleX(-1);
+      pointer-events: none;
+    }
+
+    .hall-horizontal::before {
+      content: "";
+      position: absolute;
+      right: max(-70px, calc((100vw - 1300px) / 2));
+      bottom: 18px;
+      z-index: 0;
+      width: min(560px, 46vw);
+      height: 140px;
+      background: url("assets/大礼堂-剪影-横向.svg") center / contain no-repeat;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    .hall-vertical::before {
+      content: "";
+      position: absolute;
+      left: max(-28px, calc((100vw - 1240px) / 2));
+      top: 42px;
+      z-index: 0;
+      width: min(190px, 16vw);
+      height: 320px;
+      background: url("assets/大礼堂-剪影-纵向.svg") center / contain no-repeat;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    .contact-campus::after {
+      content: "";
+      position: absolute;
+      right: max(12px, calc((100vw - 1120px) / 2));
+      bottom: 24px;
+      z-index: 0;
+      width: min(430px, 44vw);
+      height: 156px;
+      background: url("assets/大礼堂-辅助-独立.svg") center / contain no-repeat;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    .contact-lockup {
+      width: min(430px, 78vw);
+      margin: -8px 0 26px;
+      opacity: 0.9;
     }
 
     .section-head {
@@ -409,11 +642,24 @@
     }
 
     .highlight {
+      display: block;
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 20px;
       background: var(--white);
       min-height: 210px;
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .highlight:hover {
+      border-color: rgba(88, 117, 88, 0.42);
+      box-shadow: 0 16px 34px rgba(35, 24, 21, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .highlight:focus-visible {
+      outline: 3px solid rgba(88, 117, 88, 0.28);
+      outline-offset: 3px;
     }
 
     .tag {
@@ -469,6 +715,18 @@
       border-radius: 8px;
       padding: 22px;
       background: var(--white);
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .timeline-item:hover {
+      border-color: rgba(88, 117, 88, 0.42);
+      box-shadow: 0 16px 34px rgba(35, 24, 21, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .timeline-item:focus-visible {
+      outline: 3px solid rgba(88, 117, 88, 0.28);
+      outline-offset: 3px;
     }
 
     .time {
@@ -506,6 +764,27 @@
       font-size: 1.12rem;
     }
 
+    .campus-line-art {
+      width: 100%;
+      max-height: 84px;
+      margin-top: 22px;
+      opacity: 0.18;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-mark {
+      width: min(220px, 46vw);
+      opacity: 0.34;
+    }
+
     .edu-card {
       display: grid;
       grid-template-columns: 100px 1fr;
@@ -520,7 +799,7 @@
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--line);
-      background: #9f9661;
+      background: var(--teal);
     }
 
     .edu-card p {
@@ -564,11 +843,63 @@
       border-radius: 8px;
       padding: 18px;
       background: var(--white);
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .publication:hover {
+      border-color: rgba(88, 117, 88, 0.42);
+      box-shadow: 0 16px 34px rgba(35, 24, 21, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .publication.pending-link {
+      cursor: default;
+    }
+
+    .publication.pending-link:hover {
+      border-color: var(--line);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .publication-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
     }
 
     .venue {
       color: var(--teal-dark);
       font-weight: 850;
+    }
+
+    .rank {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: var(--mist);
+      color: var(--teal-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .rank.ccf-a {
+      background: #faeeee;
+      color: var(--coral);
+    }
+
+    .rank.ccf-b {
+      background: #e8f2f6;
+      color: var(--blue);
+    }
+
+    .rank.sci {
+      background: #fbf1dc;
+      color: var(--gold);
     }
 
     .publication h3 {
@@ -580,7 +911,22 @@
     .publication p {
       color: var(--muted);
       font-size: 0.94rem;
+      margin-bottom: 8px;
+    }
+
+    .publication p:last-child {
       margin-bottom: 0;
+    }
+
+    .authors b,
+    .doi b {
+      color: var(--ink);
+      font-weight: 760;
+    }
+
+    .doi {
+      color: var(--teal-dark);
+      font-weight: 700;
     }
 
     .honor-grid {
@@ -670,6 +1016,25 @@
         padding-top: 54px;
       }
 
+      .campus-silhouette {
+        width: 78vw;
+        opacity: 0.3;
+      }
+
+      .campus-silhouette-vertical {
+        width: 150px;
+        opacity: 0.22;
+      }
+
+      .hero-watermark {
+        width: 180px;
+        opacity: 0.035;
+      }
+
+      .hero-lockup {
+        width: min(300px, 80vw);
+      }
+
       h1 {
         font-size: 3.1rem;
       }
@@ -689,6 +1054,30 @@
 
       .section {
         padding: 58px 0;
+      }
+
+      .campus-band {
+        height: 46px;
+      }
+
+      .campus-band img {
+        height: 46px;
+      }
+
+      .campus-silhouette,
+      .campus-silhouette-vertical,
+      .hero-watermark,
+      .campus-mark::after,
+      .pine-mark::before,
+      .pine-mark-right::before,
+      .hall-horizontal::before,
+      .hall-vertical::before,
+      .contact-campus::after {
+        display: none;
+      }
+
+      .campus-pattern::after {
+        opacity: 0.16;
       }
 
       h1 {
@@ -724,6 +1113,11 @@
       .metric {
         min-height: 82px;
       }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -731,8 +1125,11 @@
   <header class="topbar">
     <nav class="shell nav" aria-label="主导航">
       <a class="brand" href="#top">
-        黄睿扬
-        <span>Ruiyang Huang</span>
+        <img class="brand-emblem" src="assets/东南大学彩色校标.svg" alt="" aria-hidden="true">
+        <span class="brand-text">
+          <strong>黄睿扬</strong>
+          <span>Ruiyang Huang</span>
+        </span>
       </a>
       <div class="nav-links">
         <a href="#about">简介</a>
@@ -746,17 +1143,35 @@
 
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
+      <img class="campus-silhouette" src="assets/大礼堂-剪影-横向.svg" alt="" aria-hidden="true">
+      <img class="campus-silhouette-vertical" src="assets/大礼堂-剪影-纵向.svg" alt="" aria-hidden="true">
+      <img class="hero-watermark" src="assets/东南大学黑白校标.svg" alt="" aria-hidden="true">
       <div class="shell hero-grid">
         <div>
+          <img class="hero-lockup" src="assets/东南大学彩色中英文字校标组合-左右.svg" alt="东南大学 Southeast University">
           <div class="eyebrow">SEU Cyber Science · Undergraduate Researcher</div>
           <h1 id="hero-title">黄睿扬<span>Ruiyang Huang</span></h1>
           <p class="lead">
             东南大学网络空间安全学院 2023 级本科生，主修密码科学与技术。研究兴趣聚焦多智能体系统安全、无人集群系统、密码学与隐私保护、通感一体化，并在紫金山实验室、移动通信国家重点实验室、江苏省网络与信息安全重点实验室、北京大学 FineLab 等平台开展科研训练。
           </p>
           <div class="hero-actions" aria-label="主页链接">
-            <a class="button primary" href="mailto:ryhuang_572@seu.edu.cn">Email</a>
+            <a class="button" href="mailto:ryhuang_572@seu.edu.cn" aria-label="Email" title="Email">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              <span>Email</span>
+            </a>
             <a class="button" href="https://scholar.google.com/citations?user=Ei4812YAAAAJ&hl=zh-CN" target="_blank" rel="noreferrer">Google Scholar</a>
             <a class="button" href="https://orcid.org/0009-0007-0178-8572" target="_blank" rel="noreferrer">ORCID</a>
+            <a class="button" href="https://openreview.net/profile?id=%7ERuiyang_Huang2" target="_blank" rel="noreferrer">OpenReview</a>
+            <a class="button primary" href="https://github.com/NoWall-572" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                <path d="M9 18c-4.51 2-5-2-7-2"></path>
+              </svg>
+              <span>GitHub</span>
+            </a>
           </div>
           <div class="metric-strip" aria-label="个人概览">
             <div class="metric">
@@ -780,13 +1195,13 @@
 
         <div class="portrait-wrap">
           <figure class="portrait-panel">
-            <img class="portrait" src="assets/profile.png" alt="黄睿扬头像">
+            <img class="portrait" src="assets/profile.jpg" alt="黄睿扬头像">
             <figcaption class="portrait-caption">
               <span>
                 <strong>IEEE Student Member</strong>
-                IEEE SPS Member · ACM MM '26 Reviewer
+                IEEE SPS Member
               </span>
-              <img class="school-mark" src="assets/seu-logo.png" alt="东南大学校徽">
+              <img class="school-mark" src="assets/东南大学彩色校标.svg" alt="东南大学校徽">
             </figcaption>
           </figure>
           <div class="research-map" aria-label="研究方向">
@@ -795,50 +1210,48 @@
             <div class="map-node"><b>Cryptography</b>身份认证与密钥协商、隐私保护与威胁模型分析</div>
             <div class="map-node"><b>ISAC</b>WiFi 通感定位、CSI/BFM 建模与射频指纹识别</div>
           </div>
+          <img class="motto-mark" src="assets/校训横排.svg" alt="止于至善">
         </div>
       </div>
     </section>
 
-    <section class="section" id="about">
+    <div class="campus-band" aria-hidden="true">
+      <img src="assets/大礼堂-连续.svg" alt="">
+    </div>
+
+    <section class="section campus-mark hall-horizontal" id="about">
       <div class="shell">
         <div class="section-head">
           <div>
             <div class="kicker">PROFILE</div>
-            <h2>面向安全与智能系统的本科科研训练</h2>
+            <h2>面向安全与智能系统的本科经历</h2>
           </div>
           <p>
             目前关注高度互联系统中的安全性、可靠性与可解释诊断问题，尝试把图神经网络、密码协议分析、复杂网络建模和大语言模型结合到无人集群、多智能体系统与通感一体化场景中。
           </p>
         </div>
-        <div class="two-col">
           <div class="panel">
             <div class="edu-card">
-              <img src="assets/seu-logo.png" alt="东南大学校徽">
+              <img src="assets/东南大学彩色校标.svg" alt="东南大学校徽">
               <div>
                 <h3>东南大学 Southeast University</h3>
-                <p>2024.09 至今，网络空间安全学院，密码科学与技术；2023.08-2024.09，数学学院理科试验班。</p>
+                <p>2022.08-2023.07，医学院，临床医学类（医学影像学）；</p>
+                <p>2023.08-2024.07，数学学院，理科试验班；</p>
+                <p>2024.08 至今，网络空间安全学院，密码科学与技术。</p>
               </div>
             </div>
             <ul class="fact-list">
               <li><b>身份</b><span>中共党员，紫金山实验室内生安全“五色石计划”学生成员</span></li>
-              <li><b>语言</b><span>CET-4 / CET-6：604 / 513</span></li>
+              <li><b>语言</b><span>CET-4：513，CET-6：604</span></li>
               <li><b>审稿</b><span>ACM MM '26 及其 Dataset Track 审稿人</span></li>
             </ul>
-          </div>
-          <div class="panel">
-            <h3>代表课程</h3>
-            <ul class="plain-list">
-              <li><b>数学</b><span>工科数学分析 I/II，高等代数与解析几何 I/II</span></li>
-              <li><b>编程</b><span>C++ 程序设计，计算机语言课程设计</span></li>
-              <li><b>安全</b><span>信息安全数学基础，密码科学与技术相关课程</span></li>
-              <li><b>训练</b><span>多个校级重点、国家级创新创业类 SRT 项目结项优秀或良好</span></li>
-            </ul>
+            <img class="campus-line-art" src="assets/大礼堂-独立.svg" alt="" aria-hidden="true">
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section alt" id="research">
+    <section class="section alt campus-pattern pine-mark" id="research">
       <div class="shell">
         <div class="section-head">
           <div>
@@ -874,7 +1287,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section hall-vertical">
       <div class="shell">
         <div class="section-head">
           <div>
@@ -886,140 +1299,163 @@
           </p>
         </div>
         <div class="highlight-grid">
-          <article class="highlight">
-            <span class="tag">IEEE T-VT</span>
-            <h3>基于 HECC 的无人机 AKA 协议</h3>
-            <p>第一作者，针对 eCK 威胁模型下的节点捕获与临时密钥泄露风险，设计并证明安全的认证密钥协商方案。</p>
-          </article>
-          <article class="highlight">
-            <span class="tag blue">ICASSP '26</span>
-            <h3>WiFi 通感定位与身份识别</h3>
-            <p>第一作者，基于 BFM/CSI 数据、时空图建模与射频指纹进行室内定位和身份识别。</p>
-          </article>
-          <article class="highlight">
+          <a class="highlight" href="https://arxiv.org/abs/2605.28214" target="_blank" rel="noreferrer">
+            <span class="tag">arXiv preprint</span>
+            <h3>揭示多智能体系统中的潜在攻击</h3>
+            <p>围绕 latent-based 多智能体系统中的潜在攻击展开分析。</p>
+          </a>
+          <a class="highlight" href="https://arxiv.org/abs/2511.14684" target="_blank" rel="noreferrer">
+            <span class="tag blue">arXiv preprint</span>
+            <h3>基于 LLM 的学生推理对齐与数学错误纠正</h3>
+            <p>SMRC 面向数学错误纠正，将学生推理与大语言模型纠错过程对齐。</p>
+          </a>
+          <a class="highlight" href="#publications">
             <span class="tag coral">ACL Findings '26</span>
             <h3>风险驱动的 MAS 恶意信息阻断</h3>
-            <p>第一作者，利用图神经网络监测交互动态，并通过分层拓扑优化抑制恶意传播。</p>
-          </article>
-          <article class="highlight">
+            <p>利用图神经网络监测交互动态，并通过分层拓扑优化抑制恶意传播。</p>
+          </a>
+          <a class="highlight" href="#publications">
             <span class="tag gold">ICML '26</span>
             <h3>高效可进化 LLM 代理工具编排</h3>
-            <p>共同第一作者，EvoC2F 通过中间表示优化自主代理的工具编排、执行效率和可靠性。</p>
-          </article>
+            <p>EvoC2F 通过中间表示优化自主代理的工具编排、执行效率和可靠性。</p>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section alt">
+    <section class="section alt campus-pattern pine-mark-right">
       <div class="shell">
         <div class="section-head">
           <div>
             <div class="kicker">EXPERIENCE</div>
-            <h2>主要科研经历</h2>
+            <h2>主要科研实习</h2>
           </div>
           <p>
             从密码协议设计到多智能体系统安全，再到无人集群可靠性和无线通感，项目之间共享一个核心问题：在开放、复杂、动态的系统中建立可信运行机制。
           </p>
         </div>
         <div class="timeline">
-          <article class="timeline-item">
-            <div class="time">2025.10-Now</div>
+          <a class="timeline-item" href="https://github.com/pku-finelab" target="_blank" rel="noreferrer">
+            <div class="time">2025.07-Now</div>
             <div>
-              <h3>协同 GNN 与 LLM 强化 MAS 中的故障归因</h3>
-              <p>将执行轨迹建模为动态异质因果图，通过 STGAT 缩小可疑范围，再由 SFT-LLM 对候选节点进行语义验证；同时提出 PolyGen 自动化故障样本生成管道。</p>
+              <h3>北京大学软件与微电子学院FineLab实验室</h3>
+              <p>智能软件系统中的安全防御与可靠性分析。</p>
             </div>
-          </article>
-          <article class="timeline-item">
-            <div class="time">2025.07-2026.04</div>
+          </a>
+          <a class="timeline-item" href="https://www.pmlabs.com.cn/" target="_blank" rel="noreferrer">
+            <div class="time">2024.10-Now</div>
             <div>
-              <h3>基于风险驱动的 MAS 恶意信息阻断与重塑</h3>
-              <p>构建面向 LLM-MAS 的安全防御框架，利用节点风险熵和边攻击传导性识别脆弱点，执行剪枝、隔离与社区传播阻断。</p>
+              <h3>东南大学紫金山实验室（PML）</h3>
+              <p>无人集群系统在多重攻击下的安全性与可靠性评估。</p>
             </div>
-          </article>
-          <article class="timeline-item">
-            <div class="time">2024.10-2026.04</div>
+          </a>
+          <a class="timeline-item" href="https://ncrl.seu.edu.cn/" target="_blank" rel="noreferrer">
+            <div class="time">2024.10-Now</div>
             <div>
-              <h3>WiFi 通感定位与身份识别一体化研究</h3>
-              <p>围绕公开明文信道信息可能遭受重放与伪造攻击的问题，采集 CSI/BFM 数据，构建天线对时空图，并结合 STGCN 与射频指纹完成定位和识别。</p>
+              <h3>东南大学移动通信国家重点实验室（NCRL）</h3>
+              <p>室内WiFi通信感知定位与身份识别的一体化研究。</p>
             </div>
-          </article>
-          <article class="timeline-item">
-            <div class="time">2024.10-2026.04</div>
+          </a>
+          <a class="timeline-item" href="http://jssec.seu.edu.cn/index.html" target="_blank" rel="noreferrer">
+            <div class="time">2024.10-2025.09</div>
             <div>
-              <h3>多重攻击下空海协同无人集群可靠性评估</h3>
-              <p>提出“通信-结构-任务”三层模型、结构化敌手模型、SurBi-Rank 重要度评估方法，并结合 NSGA-III 与熵权 TOPSIS 进行拓扑优化。</p>
+              <h3>江苏省网络与信息安全重点实验室</h3>
+              <p>基于LLM的Tor暗网流量未知威胁发现与研究。</p>
             </div>
-          </article>
-          <article class="timeline-item">
-            <div class="time">2024.01-2025.03</div>
-            <div>
-              <h3>基于 HECC 的无人机身份认证与密钥协商协议</h3>
-              <p>分析 baseline 协议在 eCK 敌手模型下的安全问题，给出攻击路径，并设计可抵御 Node-Capture 与 ESL 攻击的 AKA 协议。</p>
-            </div>
-          </article>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="publications">
+    <section class="section campus-mark hall-horizontal" id="publications">
       <div class="shell">
         <div class="section-head">
           <div>
             <div class="kicker">PUBLICATIONS</div>
-            <h2>成果与合作工作</h2>
+            <h2>论文成果</h2>
           </div>
           <p>
-            这里以简历中的公开状态为准，侧重展示研究主题、作者贡献和目标场景。后续可以继续补充论文题目、DOI、arXiv 链接与代码仓库。
+            点击论文卡片可跳转到出版页。“†”为共同第一作者，“✉”为通讯作者。
           </p>
         </div>
         <div class="publication-list">
-          <article class="publication">
-            <div class="venue">T-VT</div>
-            <div>
-              <h3>HECC-based authentication and key agreement for UAV systems</h3>
-              <p>第一作者，IEEE Transactions on Vehicular Technology，已录用并出版。</p>
+          <a class="publication" href="https://doi.org/10.1109/TVT.2026.3658329" target="_blank" rel="noreferrer">
+            <div class="publication-meta">
+              <span class="venue">IEEE T-VT</span>
+              <span class="rank sci">JCR Q1</span>
             </div>
-          </article>
-          <article class="publication">
-            <div class="venue">ICASSP '26</div>
             <div>
-              <h3>WiFi sensing, localization and identity recognition with CSI/BFM modeling</h3>
-              <p>第一作者，IEEE International Conference on Acoustics, Speech, and Signal Processing，已录用并出版。</p>
+              <h3>A Robust HECC-based Authentication and Key Agreement for UAV-enabled SAR Networks</h3>
+              <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>, Ning Gao✉, Qiang Ni, Shi Jin · First Author</p>
+              <p>IEEE Transactions on Vehicular Technology，已录用并出版。</p>
+              <p class="doi"><b>DOI:</b> 10.1109/TVT.2026.3658329</p>
             </div>
-          </article>
-          <article class="publication">
-            <div class="venue">ACL '26</div>
+          </a>
+          <a class="publication" href="https://doi.org/10.1109/ICASSP55912.2026.11463151" target="_blank" rel="noreferrer">
+            <div class="publication-meta">
+              <span class="venue">ICASSP '26</span>
+              <span class="rank ccf-b">CCF-B</span>
+            </div>
             <div>
-              <h3>Risk-driven malicious information blocking and reshaping in LLM-based MAS</h3>
-              <p>第一作者，The Annual Meeting of the Association for Computational Linguistics，Findings 录用。</p>
+              <h3>STAR-RFF: Spatio-Temporal Sensing Assisted Robust Radio Frequency Fingerprint Identification Via STGCN</h3>
+              <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>†, Chaoyue Yang†, Like Ren, Fengrui Liu, Yifan Wu, Ning Gao✉, Shi Jin · First Author</p>
+              <p>IEEE International Conference on Acoustics, Speech, and Signal Processing，已录用并出版。</p>
+              <p class="doi"><b>DOI:</b> 10.1109/ICASSP55912.2026.11463151</p>
             </div>
-          </article>
-          <article class="publication">
-            <div class="venue">ICML '26</div>
+          </a>
+          <a class="publication" href="https://aclanthology.org/2026.findings-acl.426/" target="_blank" rel="noreferrer">
+            <div class="publication-meta">
+              <span class="venue">ACL '26</span>
+              <span class="rank ccf-a">Findings</span>
+            </div>
             <div>
-              <h3>EvoC2F: efficient and evolvable tool orchestration for LLM agents</h3>
-              <p>共同第一作者，International Conference on Machine Learning，已录用。</p>
+              <h3>TopoSHIELD: Reshaping the Flow of Malice via Spatio-Temporal Risk-Aware Topological Evolution in Multi-Agent Systems</h3>
+              <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>†, Chenxi Wang†, Tinghe Zhang, Fengrui Liu, Jiayan Sun, Haocheng Wang, and Yifan Wu✉ · First Author</p>
+              <p>Findings of the Association for Computational Linguistics: ACL 2026，已录用并出版。</p>
+              <p class="doi"><b>DOI:</b> forthcoming</p>
             </div>
-          </article>
-          <article class="publication">
-            <div class="venue">ICMR '26</div>
+          </a>
+          <a class="publication" href="https://icml.cc/virtual/2026/poster/63166" target="_blank" rel="noreferrer">
+            <div class="publication-meta">
+              <span class="venue">ICML '26</span>
+              <span class="rank ccf-a">CCF-A</span>
+            </div>
             <div>
-              <h3>Procedural synthetic audio pretraining without real data dependency</h3>
-              <p>第二作者，ACM International Conference on Multimedia Retrieval，已录用；扩展期刊论文投稿 IEEE T-ASLP。</p>
+              <h3>EvoC2F: Compiling Tool Orchestration for Efficient and Evolvable LLM Agents</h3>
+              <p class="authors"><b>Authors:</b> Lei Wei†, Qi Liu†, <u>Ruiyang Huang</u>†, Xiao Peng, Sicong Xie, Lanbo Lin, Chenhao Jiang, Yuanwu Xu, Tianyuan Yang, Jiayao Liu, Li Cai, Yuying Li, Bin Wang✉ · Co-first Author</p>
+              <p>Proceedings of the 43rd International Conference on Machine Learning，已录用。</p>
+              <p class="doi"><b>DOI:</b> forthcoming</p>
             </div>
-          </article>
-          <article class="publication">
-            <div class="venue">ICIC '25</div>
+          </a>
+          <a class="publication" href="https://doi.org/10.1145/3805622.3810789" target="_blank" rel="noreferrer">
+            <div class="publication-meta">
+              <span class="venue">ICMR '26</span>
+              <span class="rank ccf-b">CCF-B</span>
+            </div>
             <div>
-              <h3>Spherical-vector particle swarm optimization for UAV swarm path planning</h3>
-              <p>第三作者，International Conference On Intelligent Computing，已录用并出版。</p>
+              <h3>From Physics to Representation: Audio Learning with Synthetic Pre-training via Procedural Generation</h3>
+              <p class="authors"><b>Authors:</b> Fengrui Liu, <u>Ruiyang Huang</u>, Qijian Zheng, Yuanfang Wang, Feng Liu✉ · Second Author</p>
+              <p>Proceedings of the 2026 International Conference on Multimedia Retrieval，已录用并出版。</p>
+              <p class="doi"><b>DOI:</b> 10.1145/3805622.3810789</p>
             </div>
-          </article>
+          </a>
+          <a class="publication" href="https://doi.org/10.1007/978-981-96-9921-6_39" target="_blank" rel="noreferrer">
+            <div class="publication-meta">
+              <span class="venue">ICIC '25</span>
+              <span class="rank ccf-c">CCF-C</span>
+            </div>
+            <div>
+              <h3>Smooth Path Planning Based on Spherical Vector Particle Swarm Optimization</h3>
+              <p class="authors"><b>Authors:</b> Wenting Su, Zixuan Liu✉, <u>Ruiyang Huang</u> · Third Author</p>
+              <p>Advanced Intelligent Computing Technology and Applications，已录用并出版。</p>
+              <p class="doi"><b>DOI:</b> 10.1007/978-981-96-9921-6_39</p>
+            </div>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section alt" id="honors">
+    <section class="section alt campus-pattern hall-vertical" id="honors">
       <div class="shell">
         <div class="section-head">
           <div>
@@ -1051,17 +1487,17 @@
           <article class="honor-card">
             <h3>创新竞赛</h3>
             <ul>
-              <li>2024 年中国国际大学生创新大赛国家级铜奖</li>
-              <li>2025 年全国大学生信息安全竞赛作品赛国家级二等奖</li>
-              <li>2025 年“建行杯”江苏大学生创新大赛省级二等奖</li>
-              <li>2026 年华东师范大学“挑战杯”选拔赛金奖</li>
+              <li>2024 年中国国际大学生创新大赛，铜奖</li>
+              <li>2025 年全国大学生信息安全竞赛（作品赛），二等奖</li>
+              <li>2023 年全国大学生生命科学竞赛（创新创业类），铜奖</li>
+              <li>2024、2025 年“建行杯”江苏省大学生创新大赛，二等奖</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section contact-campus pine-mark" id="contact">
       <div class="shell">
         <div class="section-head">
           <div>
@@ -1072,14 +1508,15 @@
             欢迎围绕多智能体系统安全、无人集群可靠性、密码协议设计、无线通感与智能体工具编排等方向交流。
           </p>
         </div>
+        <img class="contact-lockup" src="assets/东南大学彩色中英文字校标组合-左右.svg" alt="东南大学 Southeast University">
         <div class="contact">
           <a class="contact-card" href="mailto:ryhuang_572@seu.edu.cn">
             <span>School Email</span>
-            <strong>ryhuang_572@seu.edu.cn</strong>
+            <strong>ryhuang_572(at)seu(dot)edu(dot)cn</strong>
           </a>
           <a class="contact-card" href="mailto:NoWall_572@outlook.com">
             <span>Personal Email</span>
-            <strong>NoWall_572@outlook.com</strong>
+            <strong>NoWall_572(at)outlook(dot)com</strong>
           </a>
           <a class="contact-card" href="https://scholar.google.com/citations?user=Ei4812YAAAAJ&hl=zh-CN" target="_blank" rel="noreferrer">
             <span>Google Scholar</span>
@@ -1089,13 +1526,22 @@
             <span>ORCID</span>
             <strong>0009-0007-0178-8572</strong>
           </a>
+          <a class="contact-card" href="https://openreview.net/profile?id=%7ERuiyang_Huang2" target="_blank" rel="noreferrer">
+            <span>OpenReview</span>
+            <strong>openreview.net/profile</strong>
+          </a>
+          <a class="contact-card" href="https://github.com/NoWall-572" target="_blank" rel="noreferrer">
+            <span>GitHub</span>
+            <strong>github.com/NoWall-572</strong>
+          </a>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="shell">
+    <div class="shell footer-inner">
+      <img class="footer-mark" src="assets/东南大学标准字-横排.svg" alt="" aria-hidden="true">
       <span>© 2026 Ruiyang Huang. Built for GitHub Pages from resume materials.</span>
     </div>
   </footer>
