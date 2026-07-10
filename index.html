@@ -33,12 +33,182 @@
 
     body {
       margin: 0;
+      overflow: hidden;
       background:
         linear-gradient(180deg, rgba(88, 117, 88, 0.035), transparent 420px),
         var(--paper);
       color: var(--ink);
       font-family: "Inter", "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
       line-height: 1.65;
+    }
+
+    .site-layout {
+      display: grid;
+      grid-template-columns: minmax(320px, 26vw) minmax(0, 1fr);
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    .profile-sidebar {
+      position: relative;
+      isolation: isolate;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      border-right: 1px solid rgba(180, 183, 185, 0.72);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(241, 245, 239, 0.94)),
+        var(--mist);
+    }
+
+    .profile-sidebar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(90deg, rgba(88, 117, 88, 0.065) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(88, 117, 88, 0.065) 1px, transparent 1px);
+      background-size: 42px 42px;
+      pointer-events: none;
+    }
+
+    .profile-sidebar::after {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 3;
+      height: 5px;
+      background: linear-gradient(90deg, var(--teal) 0 43%, var(--gold) 43% 62%, var(--blue) 62% 82%, var(--sand) 82% 100%);
+    }
+
+    .sidebar-pine {
+      position: absolute;
+      z-index: -2;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .sidebar-pine {
+      top: 72px;
+      left: -82px;
+      width: 230px;
+      opacity: 0.1;
+      transform: rotate(-5deg);
+    }
+
+    .profile-sidebar__inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 14px;
+      width: 100%;
+      height: 100%;
+      padding: 30px clamp(26px, 3vw, 48px);
+    }
+
+    .profile-sidebar .hero-lockup {
+      width: min(245px, 100%);
+      margin: 0 0 2px;
+    }
+
+    .profile-sidebar .portrait-wrap {
+      align-self: stretch;
+      justify-items: start;
+    }
+
+    .profile-sidebar .portrait-panel {
+      width: min(230px, 82%);
+      margin: 0;
+      box-shadow: 0 18px 44px rgba(35, 24, 21, 0.16);
+    }
+
+    .profile-sidebar .portrait-caption {
+      left: 14px;
+      right: 14px;
+      bottom: 12px;
+    }
+
+    .profile-sidebar .portrait-caption strong {
+      font-size: 0.96rem;
+    }
+
+    .profile-sidebar .school-mark {
+      width: 58px;
+      height: 58px;
+      flex: 0 0 58px;
+    }
+
+    .profile-sidebar .motto-mark {
+      width: min(215px, 78%);
+      margin: 14px 0 0;
+      opacity: 0.76;
+    }
+
+    .sidebar-copy {
+      width: 100%;
+    }
+
+    .profile-sidebar .eyebrow {
+      margin: 0 0 9px;
+      font-size: 0.78rem;
+    }
+
+    .profile-sidebar .eyebrow::before {
+      width: 28px;
+    }
+
+    .profile-sidebar h1 {
+      margin-bottom: 0;
+      font-size: 2.75rem;
+    }
+
+    .profile-sidebar h1 span {
+      margin-top: 7px;
+      font-size: 1.12rem;
+    }
+
+    .profile-sidebar .hero-actions {
+      gap: 8px;
+      margin: 2px 0 0;
+    }
+
+    .profile-sidebar .button {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 7px 10px;
+      font-size: 0.82rem;
+      box-shadow: 0 6px 16px rgba(35, 24, 21, 0.055);
+    }
+
+    .profile-sidebar .button svg {
+      width: 17px;
+      height: 17px;
+      flex-basis: 17px;
+    }
+
+    .content-pane {
+      min-width: 0;
+      height: 100vh;
+      height: 100dvh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      scrollbar-gutter: stable;
+      background: var(--paper);
+    }
+
+    .content-pane .shell {
+      width: min(1060px, calc(100% - 56px));
+    }
+
+    .content-pane .section,
+    .content-pane #top {
+      scroll-margin-top: 76px;
     }
 
     img {
@@ -155,20 +325,20 @@
 
     .campus-silhouette {
       position: absolute;
-      right: max(-24px, calc((100vw - 1280px) / 2));
+      right: -24px;
       bottom: -2px;
       z-index: 0;
-      width: min(760px, 58vw);
+      width: min(720px, 68%);
       opacity: 0.44;
       pointer-events: none;
     }
 
     .campus-silhouette-vertical {
       position: absolute;
-      left: max(-28px, calc((100vw - 1320px) / 2));
+      left: -32px;
       top: 104px;
       z-index: 0;
-      width: min(210px, 18vw);
+      width: min(190px, 20%);
       opacity: 0.34;
       pointer-events: none;
     }
@@ -176,7 +346,7 @@
     .hero-watermark {
       position: absolute;
       top: 96px;
-      right: max(24px, calc((100vw - 1160px) / 2));
+      right: 34px;
       z-index: 0;
       width: clamp(160px, 20vw, 300px);
       opacity: 0.045;
@@ -194,11 +364,51 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
       align-items: center;
-      gap: 48px;
-      min-height: 650px;
-      padding: 76px 0 64px;
+      gap: 42px;
+      min-height: 610px;
+      padding: 72px 0 66px;
+    }
+
+    .hero-summary {
+      position: relative;
+    }
+
+    .hero-summary .kicker {
+      margin-bottom: 12px;
+    }
+
+    .hero-summary h2 {
+      max-width: 720px;
+      margin-bottom: 22px;
+      font-size: 2.8rem;
+      line-height: 1.16;
+    }
+
+    .hero-summary .lead {
+      max-width: 760px;
+    }
+
+    .hero-research {
+      position: relative;
+      padding-left: 26px;
+      border-left: 1px solid rgba(88, 117, 88, 0.28);
+    }
+
+    .hero-research-label {
+      display: block;
+      margin-bottom: 15px;
+      color: var(--teal-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .hero-research .research-map {
+      grid-template-columns: 1fr;
+      width: 100%;
+      margin-top: 0;
     }
 
     .eyebrow {
@@ -990,6 +1200,129 @@
       background: var(--paper);
     }
 
+    @media (min-width: 1101px) and (max-height: 700px) {
+      .profile-sidebar__inner {
+        gap: 8px;
+        padding-top: 18px;
+        padding-bottom: 18px;
+      }
+
+      .profile-sidebar .hero-lockup {
+        width: 205px;
+      }
+
+      .profile-sidebar .portrait-panel {
+        width: 175px;
+      }
+
+      .profile-sidebar .motto-mark {
+        width: 170px;
+        margin-top: 8px;
+      }
+
+      .profile-sidebar h1 {
+        font-size: 2.15rem;
+      }
+
+      .profile-sidebar h1 span {
+        font-size: 0.96rem;
+      }
+
+      .profile-sidebar .eyebrow {
+        margin-bottom: 4px;
+      }
+
+      .profile-sidebar .button {
+        min-height: 34px;
+        padding: 5px 8px;
+        font-size: 0.76rem;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      body {
+        overflow: auto;
+      }
+
+      .site-layout {
+        display: block;
+        height: auto;
+        overflow: visible;
+      }
+
+      .profile-sidebar {
+        height: auto;
+        min-height: 590px;
+        overflow: hidden;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .profile-sidebar__inner {
+        display: grid;
+        grid-template-columns: minmax(230px, 290px) minmax(0, 1fr);
+        grid-template-areas:
+          "lockup copy"
+          "portrait copy"
+          "portrait actions";
+        align-content: center;
+        column-gap: 52px;
+        row-gap: 16px;
+        width: min(920px, calc(100% - 48px));
+        height: auto;
+        min-height: 590px;
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+
+      .profile-sidebar .hero-lockup {
+        grid-area: lockup;
+        align-self: end;
+        width: min(270px, 100%);
+      }
+
+      .profile-sidebar .portrait-wrap {
+        grid-area: portrait;
+      }
+
+      .profile-sidebar .portrait-panel {
+        width: min(260px, 100%);
+      }
+
+      .sidebar-copy {
+        grid-area: copy;
+        align-self: end;
+      }
+
+      .profile-sidebar .hero-actions {
+        grid-area: actions;
+        align-self: start;
+      }
+
+      .profile-sidebar h1 {
+        font-size: 3.35rem;
+      }
+
+      .profile-sidebar h1 span {
+        font-size: 1.3rem;
+      }
+
+      .sidebar-pine {
+        left: -36px;
+        width: 270px;
+        opacity: 0.08;
+      }
+
+      .content-pane {
+        height: auto;
+        overflow: visible;
+      }
+
+      .content-pane .shell {
+        width: min(100% - 40px, 1060px);
+      }
+    }
+
     @media (max-width: 920px) {
       .nav {
         align-items: flex-start;
@@ -1014,6 +1347,22 @@
         min-height: auto;
         gap: 34px;
         padding-top: 54px;
+      }
+
+      .hero-research {
+        padding-top: 28px;
+        padding-left: 0;
+        border-top: 1px solid rgba(88, 117, 88, 0.28);
+        border-left: 0;
+      }
+
+      .hero-research .research-map {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .content-pane .section,
+      .content-pane #top {
+        scroll-margin-top: 132px;
       }
 
       .campus-silhouette {
@@ -1048,6 +1397,54 @@
     }
 
     @media (max-width: 640px) {
+      .profile-sidebar {
+        min-height: auto;
+      }
+
+      .profile-sidebar__inner {
+        display: flex;
+        width: min(100% - 40px, 520px);
+        min-height: auto;
+        padding: 42px 0 48px;
+      }
+
+      .profile-sidebar .hero-lockup {
+        align-self: flex-start;
+        width: min(250px, 78vw);
+      }
+
+      .profile-sidebar .portrait-wrap {
+        align-self: stretch;
+      }
+
+      .profile-sidebar .portrait-panel {
+        width: min(275px, 84vw);
+      }
+
+      .profile-sidebar h1 {
+        font-size: 2.5rem;
+      }
+
+      .profile-sidebar h1 span {
+        font-size: 1.12rem;
+      }
+
+      .profile-sidebar .hero-actions {
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        justify-content: start;
+        width: 100%;
+      }
+
+      .profile-sidebar .button {
+        min-height: 40px;
+        font-size: 0.8rem;
+      }
+
+      .content-pane .shell {
+        width: min(100% - 24px, 1060px);
+      }
+
       .shell {
         width: min(100% - 24px, 1120px);
       }
@@ -1092,6 +1489,10 @@
         font-size: 1.82rem;
       }
 
+      .hero-summary h2 {
+        font-size: 2.15rem;
+      }
+
       .lead {
         font-size: 1rem;
       }
@@ -1101,6 +1502,10 @@
       .highlight-grid,
       .honor-grid,
       .research-map {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-research .research-map {
         grid-template-columns: 1fr;
       }
 
@@ -1119,80 +1524,27 @@
         flex-direction: column;
       }
     }
+
+    @media (max-width: 340px) {
+      .profile-sidebar .hero-actions {
+        grid-template-columns: repeat(2, max-content);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html,
+      .content-pane {
+        scroll-behavior: auto;
+      }
+    }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <nav class="shell nav" aria-label="主导航">
-      <a class="brand" href="#top">
-        <img class="brand-emblem" src="assets/东南大学彩色校标.svg" alt="" aria-hidden="true">
-        <span class="brand-text">
-          <strong>黄睿扬</strong>
-          <span>Ruiyang Huang</span>
-        </span>
-      </a>
-      <div class="nav-links">
-        <a href="#about">简介</a>
-        <a href="#research">研究</a>
-        <a href="#publications">成果</a>
-        <a href="#honors">荣誉</a>
-        <a href="#contact">联系</a>
-      </div>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <img class="campus-silhouette" src="assets/大礼堂-剪影-横向.svg" alt="" aria-hidden="true">
-      <img class="campus-silhouette-vertical" src="assets/大礼堂-剪影-纵向.svg" alt="" aria-hidden="true">
-      <img class="hero-watermark" src="assets/东南大学黑白校标.svg" alt="" aria-hidden="true">
-      <div class="shell hero-grid">
-        <div>
-          <img class="hero-lockup" src="assets/东南大学彩色中英文字校标组合-左右.svg" alt="东南大学 Southeast University">
-          <div class="eyebrow">SEU Cyber Science · Undergraduate Researcher</div>
-          <h1 id="hero-title">黄睿扬<span>Ruiyang Huang</span></h1>
-          <p class="lead">
-            东南大学网络空间安全学院 2023 级本科生，主修密码科学与技术。研究兴趣聚焦多智能体系统安全、无人集群系统、密码学与隐私保护、通感一体化，并在紫金山实验室、移动通信国家重点实验室、江苏省网络与信息安全重点实验室、北京大学 FineLab 等平台开展科研训练。
-          </p>
-          <div class="hero-actions" aria-label="主页链接">
-            <a class="button" href="mailto:ryhuang_572@seu.edu.cn" aria-label="Email" title="Email">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-              </svg>
-              <span>Email</span>
-            </a>
-            <a class="button" href="https://scholar.google.com/citations?user=Ei4812YAAAAJ&hl=zh-CN" target="_blank" rel="noreferrer">Google Scholar</a>
-            <a class="button" href="https://orcid.org/0009-0007-0178-8572" target="_blank" rel="noreferrer">ORCID</a>
-            <a class="button" href="https://openreview.net/profile?id=%7ERuiyang_Huang2" target="_blank" rel="noreferrer">OpenReview</a>
-            <a class="button primary" href="https://github.com/NoWall-572" target="_blank" rel="noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
-                <path d="M9 18c-4.51 2-5-2-7-2"></path>
-              </svg>
-              <span>GitHub</span>
-            </a>
-          </div>
-          <div class="metric-strip" aria-label="个人概览">
-            <div class="metric">
-              <strong>6</strong>
-              <span>绩点排名</span>
-            </div>
-            <div class="metric">
-              <strong>2</strong>
-              <span>综合测评排名</span>
-            </div>
-            <div class="metric">
-              <strong>36.3</strong>
-              <span>SRTP 学分</span>
-            </div>
-            <div class="metric">
-              <strong>333.5h</strong>
-              <span>志愿服务时长</span>
-            </div>
-          </div>
-        </div>
-
+  <div class="site-layout">
+    <aside class="profile-sidebar" aria-label="个人信息">
+      <img class="sidebar-pine" src="assets/六朝松.svg" alt="" aria-hidden="true">
+      <div class="profile-sidebar__inner">
+        <img class="hero-lockup" src="assets/东南大学彩色中英文字校标组合-左右.svg" alt="东南大学 Southeast University">
         <div class="portrait-wrap">
           <figure class="portrait-panel">
             <img class="portrait" src="assets/profile.jpg" alt="黄睿扬头像">
@@ -1204,16 +1556,97 @@
               <img class="school-mark" src="assets/东南大学彩色校标.svg" alt="东南大学校徽">
             </figcaption>
           </figure>
-          <div class="research-map" aria-label="研究方向">
-            <div class="map-node"><b>MAS Security</b>多智能体系统中的风险传播、恶意信息阻断与故障归因</div>
-            <div class="map-node"><b>UAV Swarms</b>无人集群通信、认证、可靠性建模与拓扑优化</div>
-            <div class="map-node"><b>Cryptography</b>身份认证与密钥协商、隐私保护与威胁模型分析</div>
-            <div class="map-node"><b>ISAC</b>WiFi 通感定位、CSI/BFM 建模与射频指纹识别</div>
-          </div>
           <img class="motto-mark" src="assets/校训横排.svg" alt="止于至善">
         </div>
+        <div class="sidebar-copy">
+          <div class="eyebrow">SEU Cyber Science · Undergraduate Researcher</div>
+          <h1 id="hero-title">黄睿扬<span>Ruiyang Huang</span></h1>
+        </div>
+        <div class="hero-actions" aria-label="主页链接">
+          <a class="button" href="mailto:ryhuang_572@seu.edu.cn" aria-label="Email" title="Email">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>Email</span>
+          </a>
+          <a class="button" href="https://scholar.google.com/citations?user=Ei4812YAAAAJ&hl=zh-CN" target="_blank" rel="noreferrer">Google Scholar</a>
+          <a class="button" href="https://orcid.org/0009-0007-0178-8572" target="_blank" rel="noreferrer">ORCID</a>
+          <a class="button" href="https://openreview.net/profile?id=%7ERuiyang_Huang2" target="_blank" rel="noreferrer">OpenReview</a>
+          <a class="button primary" href="https://github.com/NoWall-572" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+              <path d="M9 18c-4.51 2-5-2-7-2"></path>
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </div>
       </div>
-    </section>
+    </aside>
+
+    <div class="content-pane">
+      <header class="topbar">
+        <nav class="shell nav" aria-label="主导航">
+          <a class="brand" href="#top">
+            <img class="brand-emblem" src="assets/东南大学彩色校标.svg" alt="" aria-hidden="true">
+            <span class="brand-text">
+              <strong>黄睿扬</strong>
+              <span>Ruiyang Huang</span>
+            </span>
+          </a>
+          <div class="nav-links">
+            <a href="#about">简介</a>
+            <a href="#research">研究</a>
+            <a href="#publications">成果</a>
+            <a href="#honors">荣誉</a>
+            <a href="#contact">联系</a>
+          </div>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="overview-title">
+          <img class="campus-silhouette" src="assets/大礼堂-剪影-横向.svg" alt="" aria-hidden="true">
+          <img class="campus-silhouette-vertical" src="assets/大礼堂-剪影-纵向.svg" alt="" aria-hidden="true">
+          <img class="hero-watermark" src="assets/东南大学黑白校标.svg" alt="" aria-hidden="true">
+          <div class="shell hero-grid">
+            <div class="hero-summary">
+              <div class="kicker">ACADEMIC PROFILE</div>
+              <h2 id="overview-title">安全、智能与复杂系统</h2>
+              <p class="lead">
+                东南大学网络空间安全学院 2023 级本科生，主修密码科学与技术。研究兴趣聚焦多智能体系统安全、无人集群系统、密码学与隐私保护、通感一体化，并在紫金山实验室、移动通信国家重点实验室、江苏省网络与信息安全重点实验室、北京大学 FineLab 等平台开展科研训练。
+              </p>
+              <div class="metric-strip" aria-label="个人概览">
+                <div class="metric">
+                  <strong>6</strong>
+                  <span>绩点排名</span>
+                </div>
+                <div class="metric">
+                  <strong>2</strong>
+                  <span>综合测评排名</span>
+                </div>
+                <div class="metric">
+                  <strong>36.3</strong>
+                  <span>SRTP 学分</span>
+                </div>
+                <div class="metric">
+                  <strong>333.5h</strong>
+                  <span>志愿服务时长</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-research">
+              <span class="hero-research-label">FOCUS AREAS</span>
+              <div class="research-map" aria-label="研究方向">
+                <div class="map-node"><b>MAS Security</b>多智能体系统中的风险传播、恶意信息阻断与故障归因</div>
+                <div class="map-node"><b>UAV Swarms</b>无人集群通信、认证、可靠性建模与拓扑优化</div>
+                <div class="map-node"><b>Cryptography</b>身份认证与密钥协商、隐私保护与威胁模型分析</div>
+                <div class="map-node"><b>ISAC</b>WiFi 通感定位、CSI/BFM 建模与射频指纹识别</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
     <div class="campus-band" aria-hidden="true">
       <img src="assets/大礼堂-连续.svg" alt="">
@@ -1248,7 +1681,6 @@
             <img class="campus-line-art" src="assets/大礼堂-独立.svg" alt="" aria-hidden="true">
           </div>
         </div>
-      </div>
     </section>
 
     <section class="section alt campus-pattern pine-mark" id="research">
@@ -1403,7 +1835,7 @@
               <p class="doi"><b>DOI:</b> 10.1109/ICASSP55912.2026.11463151</p>
             </div>
           </a>
-          <a class="publication" href="https://aclanthology.org/2026.findings-acl.426/" target="_blank" rel="noreferrer">
+          <a class="publication" href="https://doi.org/10.18653/v1/2026.findings-acl.426" target="_blank" rel="noreferrer">
             <div class="publication-meta">
               <span class="venue">ACL '26</span>
               <span class="rank ccf-a">Findings</span>
@@ -1412,7 +1844,7 @@
               <h3>TopoSHIELD: Reshaping the Flow of Malice via Spatio-Temporal Risk-Aware Topological Evolution in Multi-Agent Systems</h3>
               <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>†, Chenxi Wang†, Tinghe Zhang, Fengrui Liu, Jiayan Sun, Haocheng Wang, and Yifan Wu✉ · First Author</p>
               <p>Findings of the Association for Computational Linguistics: ACL 2026，已录用并出版。</p>
-              <p class="doi"><b>DOI:</b> forthcoming</p>
+              <p class="doi"><b>DOI:</b> 10.18653/V1/2026.FINDINGS-ACL.426</p>
             </div>
           </a>
           <a class="publication" href="https://icml.cc/virtual/2026/poster/63166" target="_blank" rel="noreferrer">
@@ -1537,13 +1969,48 @@
         </div>
       </div>
     </section>
-  </main>
+      </main>
 
-  <footer>
-    <div class="shell footer-inner">
-      <img class="footer-mark" src="assets/东南大学标准字-横排.svg" alt="" aria-hidden="true">
-      <span>© 2026 Ruiyang Huang. Built for GitHub Pages from resume materials.</span>
+      <footer>
+        <div class="shell footer-inner">
+          <img class="footer-mark" src="assets/东南大学标准字-横排.svg" alt="" aria-hidden="true">
+          <span>© 2026 Ruiyang Huang. Built for GitHub Pages from resume materials.</span>
+        </div>
+      </footer>
     </div>
-  </footer>
+  </div>
+  <script>
+    (() => {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      const scrollToHash = (hash, behavior = "auto") => {
+        if (!hash || hash === "#") return;
+        const target = document.getElementById(decodeURIComponent(hash.slice(1)));
+        if (!target) return;
+        target.scrollIntoView({
+          behavior: prefersReducedMotion.matches ? "auto" : behavior,
+          block: "start"
+        });
+      };
+
+      document.addEventListener("click", (event) => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+        const hash = link.getAttribute("href");
+        if (!hash || !document.getElementById(decodeURIComponent(hash.slice(1)))) return;
+
+        event.preventDefault();
+        history.pushState(null, "", hash);
+        scrollToHash(hash, "smooth");
+      });
+
+      window.addEventListener("popstate", () => scrollToHash(window.location.hash));
+      window.addEventListener("load", () => {
+        if (window.location.hash) {
+          requestAnimationFrame(() => scrollToHash(window.location.hash));
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
