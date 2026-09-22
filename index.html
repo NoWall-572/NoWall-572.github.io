@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>黄睿扬 Ruiyang Huang | Personal Homepage</title>
-  <meta name="description" content="黄睿扬，东南大学网络空间安全学院本科生，研究方向包括多智能体系统、无人集群系统、密码学与隐私保护、通感一体化。">
+  <title>Ruiyang Huang | Personal Homepage</title>
+  <meta name="description" content="Ruiyang Huang is an undergraduate researcher in Cryptography at Southeast University, working on multi-agent systems, UAV swarms, privacy, and integrated sensing and communication.">
   <style>
     :root {
       --paper: #fbfbf7;
@@ -21,6 +21,9 @@
       --gray: #b4b7b9;
       --white: #ffffff;
       --shadow: 0 24px 60px rgba(35, 24, 21, 0.12);
+      --font-body: "Inter", "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      --font-editorial: Georgia, "Times New Roman", "Songti SC", serif;
+      --font-mono: "Cascadia Code", Consolas, "SFMono-Regular", "Liberation Mono", monospace;
     }
 
     * {
@@ -38,8 +41,32 @@
         linear-gradient(180deg, rgba(88, 117, 88, 0.035), transparent 420px),
         var(--paper);
       color: var(--ink);
-      font-family: "Inter", "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-family: var(--font-body);
       line-height: 1.65;
+    }
+
+    h2,
+    h1 span,
+    .study-heading,
+    .highlight h3,
+    .publication h3,
+    .honor-group > h3,
+    .service-group > h3 {
+      font-family: var(--font-editorial);
+    }
+
+    .kicker,
+    .time,
+    .study-date,
+    .interest .num {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .venue,
+    .venue-name {
+      font-family: var(--font-editorial);
+      font-style: italic;
     }
 
     .site-layout {
@@ -133,10 +160,6 @@
       bottom: 12px;
     }
 
-    .profile-sidebar .portrait-caption strong {
-      font-size: 0.96rem;
-    }
-
     .profile-sidebar .school-mark {
       width: 58px;
       height: 58px;
@@ -191,6 +214,13 @@
       flex-basis: 17px;
     }
 
+    .profile-icon {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      object-fit: contain;
+    }
+
     .content-pane {
       min-width: 0;
       height: 100vh;
@@ -207,6 +237,7 @@
     }
 
     .content-pane .section,
+    .content-pane .publication[id],
     .content-pane #top {
       scroll-margin-top: 76px;
     }
@@ -373,6 +404,8 @@
 
     .hero-summary {
       position: relative;
+      grid-column: 1 / -1;
+      max-width: 940px;
     }
 
     .hero-summary .kicker {
@@ -380,14 +413,90 @@
     }
 
     .hero-summary h2 {
-      max-width: 720px;
       margin-bottom: 22px;
-      font-size: 2.8rem;
-      line-height: 1.16;
     }
 
     .hero-summary .lead {
-      max-width: 760px;
+      max-width: 900px;
+    }
+
+    .study-heading {
+      margin: 28px 0 14px;
+      font-size: 1.12rem;
+      line-height: 1.35;
+    }
+
+    .bio-path {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .bio-path-item {
+      display: grid;
+      grid-template-columns: 140px 64px minmax(0, 1fr);
+      grid-template-areas: "date logo details";
+      align-items: center;
+      gap: 20px;
+      min-height: 76px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--teal);
+      border-radius: 8px;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.9);
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .bio-path-item:hover {
+      border-color: rgba(88, 117, 88, 0.42);
+      box-shadow: 0 12px 28px rgba(35, 24, 21, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .bio-path-item:focus-visible {
+      outline: 3px solid rgba(88, 117, 88, 0.45);
+      outline-offset: 3px;
+    }
+
+    .study-date {
+      grid-area: date;
+      display: block;
+      color: var(--teal-dark);
+      font-size: 0.9rem;
+    }
+
+    .study-details {
+      grid-area: details;
+      min-width: 0;
+      display: grid;
+      gap: 3px;
+      line-height: 1.45;
+    }
+
+    .study-university {
+      color: var(--ink);
+      font-family: var(--font-editorial);
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .study-school {
+      color: var(--teal-dark);
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .study-degree {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 2px;
+    }
+
+    .study-logo {
+      grid-area: logo;
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
     }
 
     .hero-research {
@@ -612,21 +721,9 @@
       z-index: 1;
       display: flex;
       align-items: end;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 12px;
       color: var(--white);
-    }
-
-    .portrait-caption strong {
-      display: block;
-      font-size: 1.1rem;
-      line-height: 1.2;
-    }
-
-    .portrait-caption span {
-      display: block;
-      font-size: 0.82rem;
-      opacity: 0.9;
     }
 
     .school-mark {
@@ -785,32 +882,22 @@
     }
 
     .section-head {
-      display: grid;
-      grid-template-columns: minmax(200px, 0.38fr) 1fr;
-      gap: 36px;
-      align-items: start;
       margin-bottom: 32px;
     }
 
     .kicker {
       color: var(--coral);
-      font-weight: 780;
-      font-size: 0.88rem;
+      font-weight: 600;
+      font-size: 0.82rem;
       margin-bottom: 8px;
     }
 
     h2 {
-      font-size: 2.35rem;
+      font-size: 2rem;
       line-height: 1.16;
       margin-bottom: 0;
       letter-spacing: 0;
-    }
-
-    .section-head p {
-      color: var(--muted);
-      max-width: 780px;
-      margin-bottom: 0;
-      font-size: 1.02rem;
+      white-space: nowrap;
     }
 
     .interest-grid {
@@ -846,18 +933,44 @@
     }
 
     .highlight-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
+      width: max-content;
       gap: 16px;
+    }
+
+    .highlight-window {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 4px 14px 2px;
+      scroll-snap-type: x proximity;
+      scrollbar-color: rgba(88, 117, 88, 0.58) transparent;
+    }
+
+    .highlight-window::-webkit-scrollbar,
+    .publication-window::-webkit-scrollbar,
+    .honor-card::-webkit-scrollbar,
+    .service-card::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    .highlight-window::-webkit-scrollbar-thumb,
+    .publication-window::-webkit-scrollbar-thumb,
+    .honor-card::-webkit-scrollbar-thumb,
+    .service-card::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(88, 117, 88, 0.46);
     }
 
     .highlight {
       display: block;
+      flex: 0 0 clamp(246px, 28vw, 310px);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 20px;
       background: var(--white);
       min-height: 210px;
+      scroll-snap-align: start;
       transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
     }
 
@@ -875,6 +988,7 @@
     .tag {
       display: inline-flex;
       align-items: center;
+      gap: 0.3em;
       min-height: 26px;
       border-radius: 999px;
       padding: 4px 10px;
@@ -902,7 +1016,7 @@
 
     .highlight h3 {
       font-size: 1.1rem;
-      line-height: 1.32;
+      line-height: 1.45;
       margin-bottom: 12px;
     }
 
@@ -914,13 +1028,18 @@
 
     .timeline {
       display: grid;
-      gap: 18px;
+      gap: 14px;
     }
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 170px 1fr;
-      gap: 26px;
+      grid-template-columns: 80px minmax(0, 1fr);
+      grid-template-areas:
+        "logo date"
+        "logo details";
+      align-items: start;
+      gap: 6px 22px;
+      min-height: 136px;
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 22px;
@@ -939,19 +1058,42 @@
       outline-offset: 3px;
     }
 
+    .research-logo {
+      grid-area: logo;
+      align-self: center;
+      width: 80px;
+      height: 80px;
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .timeline-copy {
+      grid-area: details;
+      min-width: 0;
+    }
+
+    .timeline-item .time {
+      grid-area: date;
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
     .time {
       color: var(--teal-dark);
       font-weight: 820;
     }
 
     .timeline-item h3 {
-      margin-bottom: 8px;
-      line-height: 1.35;
-      font-size: 1.12rem;
+      margin-bottom: 6px;
+      line-height: 1.4;
+      font-size: 1.08rem;
     }
 
     .timeline-item p {
       color: var(--muted);
+      font-size: 0.94rem;
       margin-bottom: 0;
     }
 
@@ -1045,6 +1187,14 @@
       gap: 14px;
     }
 
+    .publication-window {
+      height: var(--publication-window-height, min(780px, 80vh));
+      min-height: 320px;
+      overflow-y: auto;
+      padding: 4px 14px 8px 2px;
+      scrollbar-color: rgba(88, 117, 88, 0.58) transparent;
+    }
+
     .publication {
       display: grid;
       grid-template-columns: minmax(96px, 0.14fr) 1fr;
@@ -1060,6 +1210,51 @@
       border-color: rgba(88, 117, 88, 0.42);
       box-shadow: 0 16px 34px rgba(35, 24, 21, 0.1);
       transform: translateY(-2px);
+    }
+
+    .publication-with-code {
+      position: relative;
+    }
+
+    .publication-link::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+    }
+
+    .publication-link:focus-visible {
+      outline: none;
+    }
+
+    .publication-link:focus-visible::after,
+    .publication-code:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, 0.55);
+      outline-offset: 3px;
+    }
+
+    .publication-code {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 32px;
+      color: #2563eb;
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .publication-code img {
+      width: 19px;
+      height: 19px;
+      flex: 0 0 19px;
+    }
+
+    .publication-code:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .publication.pending-link {
@@ -1081,7 +1276,7 @@
 
     .venue {
       color: var(--teal-dark);
-      font-weight: 850;
+      font-weight: 700;
     }
 
     .rank {
@@ -1112,10 +1307,41 @@
       color: var(--gold);
     }
 
+    .paper-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .paper-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .paper-badge.oral {
+      color: var(--teal-dark);
+      border-color: rgba(88, 117, 88, 0.22);
+      background: var(--mist);
+    }
+
+    .paper-badge.award {
+      color: #80521a;
+      border-color: #e3c584;
+      background: #fbf1dc;
+    }
+
     .publication h3 {
       margin-bottom: 8px;
-      font-size: 1.06rem;
-      line-height: 1.34;
+      font-size: 1.1rem;
+      line-height: 1.45;
     }
 
     .publication p {
@@ -1134,27 +1360,51 @@
       font-weight: 760;
     }
 
-    .doi {
+    .authors sup {
       color: var(--teal-dark);
-      font-weight: 700;
+      font-size: 0.75em;
+      line-height: 0;
+    }
+
+    .publication .doi {
+      color: var(--teal-dark);
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 500;
+      overflow-wrap: anywhere;
     }
 
     .honor-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
 
+    .honor-group,
+    .service-group {
+      min-width: 0;
+    }
+
+    .honor-group > h3,
+    .service-group > h3 {
+      margin: 0 0 14px;
+      font-size: 1.08rem;
+      line-height: 1.35;
+    }
+
     .honor-card {
+      height: 220px;
+      overflow-y: auto;
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 22px;
       background: var(--white);
     }
 
-    .honor-card h3 {
-      margin-bottom: 14px;
-      font-size: 1.08rem;
+    .honor-card:focus-visible,
+    .service-card:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 3px;
     }
 
     .honor-card ul {
@@ -1172,6 +1422,32 @@
       grid-template-columns: 1fr 1fr;
       gap: 18px;
       align-items: stretch;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card {
+      height: 190px;
+      overflow-y: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background: var(--white);
+      scrollbar-color: rgba(88, 117, 88, 0.58) transparent;
+    }
+
+    .service-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .service-card li + li {
+      margin-top: 10px;
     }
 
     .contact-card {
@@ -1337,9 +1613,9 @@
       }
 
       .hero-grid,
-      .section-head,
       .two-col,
-      .contact {
+      .contact,
+      .service-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1361,6 +1637,7 @@
       }
 
       .content-pane .section,
+      .content-pane .publication[id],
       .content-pane #top {
         scroll-margin-top: 132px;
       }
@@ -1388,10 +1665,7 @@
         font-size: 3.1rem;
       }
 
-      .metric-strip,
-      .interest-grid,
-      .highlight-grid,
-      .honor-grid {
+      .interest-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -1430,9 +1704,9 @@
       }
 
       .profile-sidebar .hero-actions {
-        display: grid;
-        grid-template-columns: repeat(3, max-content);
-        justify-content: start;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
         width: 100%;
       }
 
@@ -1486,20 +1760,14 @@
       }
 
       h2 {
-        font-size: 1.82rem;
-      }
-
-      .hero-summary h2 {
-        font-size: 2.15rem;
+        font-size: 1.375rem;
       }
 
       .lead {
         font-size: 1rem;
       }
 
-      .metric-strip,
       .interest-grid,
-      .highlight-grid,
       .honor-grid,
       .research-map {
         grid-template-columns: 1fr;
@@ -1509,10 +1777,49 @@
         grid-template-columns: 1fr;
       }
 
-      .timeline-item,
+      .bio-path-item {
+        grid-template-columns: 56px minmax(0, 1fr);
+        grid-template-areas:
+          "logo date"
+          "logo details";
+        gap: 4px 12px;
+        padding: 14px 12px;
+      }
+
+      .study-logo {
+        width: 56px;
+        height: 56px;
+      }
+
+      .highlight {
+        flex-basis: min(78vw, 300px);
+      }
+
       .publication,
       .edu-card {
         grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 56px minmax(0, 1fr);
+        grid-template-areas:
+          "logo date"
+          "details details";
+        gap: 12px 14px;
+        padding: 16px;
+      }
+
+      .timeline-item .time {
+        align-self: center;
+      }
+
+      .timeline-item h3 {
+        font-size: 1rem;
+      }
+
+      .research-logo {
+        width: 56px;
+        height: 56px;
       }
 
       .metric {
@@ -1522,12 +1829,6 @@
       .footer-inner {
         align-items: flex-start;
         flex-direction: column;
-      }
-    }
-
-    @media (max-width: 340px) {
-      .profile-sidebar .hero-actions {
-        grid-template-columns: repeat(2, max-content);
       }
     }
 
@@ -1541,28 +1842,24 @@
 </head>
 <body>
   <div class="site-layout">
-    <aside class="profile-sidebar" aria-label="个人信息">
+    <aside class="profile-sidebar" aria-label="Personal information">
       <img class="sidebar-pine" src="assets/六朝松.svg" alt="" aria-hidden="true">
       <div class="profile-sidebar__inner">
-        <img class="hero-lockup" src="assets/东南大学彩色中英文字校标组合-左右.svg" alt="东南大学 Southeast University">
+        <img class="hero-lockup" src="assets/东南大学彩色中英文字校标组合-左右.svg" alt="Southeast University">
         <div class="portrait-wrap">
           <figure class="portrait-panel">
-            <img class="portrait" src="assets/profile.jpg" alt="黄睿扬头像">
+            <img class="portrait" src="assets/profile.jpg" alt="Portrait of Ruiyang Huang">
             <figcaption class="portrait-caption">
-              <span>
-                <strong>IEEE Student Member</strong>
-                IEEE SPS Member
-              </span>
-              <img class="school-mark" src="assets/东南大学彩色校标.svg" alt="东南大学校徽">
+              <img class="school-mark" src="assets/东南大学彩色校标.svg" alt="Southeast University emblem">
             </figcaption>
           </figure>
-          <img class="motto-mark" src="assets/校训横排.svg" alt="止于至善">
+          <img class="motto-mark" src="assets/校训横排.svg" alt="Southeast University motto">
         </div>
         <div class="sidebar-copy">
           <div class="eyebrow">SEU Cyber Science · Undergraduate Researcher</div>
           <h1 id="hero-title">黄睿扬<span>Ruiyang Huang</span></h1>
         </div>
-        <div class="hero-actions" aria-label="主页链接">
+        <div class="hero-actions" aria-label="External profiles">
           <a class="button" href="mailto:ryhuang_572@seu.edu.cn" aria-label="Email" title="Email">
             <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
               <rect width="20" height="16" x="2" y="4" rx="2"></rect>
@@ -1570,8 +1867,14 @@
             </svg>
             <span>Email</span>
           </a>
-          <a class="button" href="https://scholar.google.com/citations?user=Ei4812YAAAAJ&hl=zh-CN" target="_blank" rel="noreferrer">Google Scholar</a>
-          <a class="button" href="https://orcid.org/0009-0007-0178-8572" target="_blank" rel="noreferrer">ORCID</a>
+          <a class="button" href="https://scholar.google.com/citations?user=Ei4812YAAAAJ" target="_blank" rel="noreferrer" title="Google Scholar">
+            <img class="profile-icon" src="assets/icons/graduation-cap.svg" alt="" aria-hidden="true" width="18" height="18">
+            <span>Google Scholar</span>
+          </a>
+          <a class="button" href="https://orcid.org/0009-0007-0178-8572" target="_blank" rel="noreferrer" title="ORCID">
+            <img class="profile-icon" src="assets/icons/orcid.svg" alt="" aria-hidden="true" width="18" height="18">
+            <span>ORCID</span>
+          </a>
           <a class="button" href="https://openreview.net/profile?id=%7ERuiyang_Huang2" target="_blank" rel="noreferrer">OpenReview</a>
           <a class="button primary" href="https://github.com/NoWall-572" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -1586,7 +1889,7 @@
 
     <div class="content-pane">
       <header class="topbar">
-        <nav class="shell nav" aria-label="主导航">
+        <nav class="shell nav" aria-label="Main navigation">
           <a class="brand" href="#top">
             <img class="brand-emblem" src="assets/东南大学彩色校标.svg" alt="" aria-hidden="true">
             <span class="brand-text">
@@ -1595,54 +1898,66 @@
             </span>
           </a>
           <div class="nav-links">
-            <a href="#about">简介</a>
-            <a href="#research">研究</a>
-            <a href="#publications">成果</a>
-            <a href="#honors">荣誉</a>
-            <a href="#contact">联系</a>
+            <a href="#about">Biography</a>
+            <a href="#research">Research</a>
+            <a href="#publications">Publications</a>
+            <a href="#honors">Honors</a>
+            <a href="#service">Service</a>
+            <a href="#contact">Contact</a>
           </div>
         </nav>
       </header>
 
       <main id="top">
-        <section class="hero" aria-labelledby="overview-title">
+        <section class="hero" id="about" aria-labelledby="overview-title">
           <img class="campus-silhouette" src="assets/大礼堂-剪影-横向.svg" alt="" aria-hidden="true">
           <img class="campus-silhouette-vertical" src="assets/大礼堂-剪影-纵向.svg" alt="" aria-hidden="true">
           <img class="hero-watermark" src="assets/东南大学黑白校标.svg" alt="" aria-hidden="true">
           <div class="shell hero-grid">
             <div class="hero-summary">
-              <div class="kicker">ACADEMIC PROFILE</div>
-              <h2 id="overview-title">安全、智能与复杂系统</h2>
+              <div class="kicker">PROFILE</div>
+              <h2 id="overview-title">Biography</h2>
               <p class="lead">
-                东南大学网络空间安全学院 2023 级本科生，主修密码科学与技术。研究兴趣聚焦多智能体系统安全、无人集群系统、密码学与隐私保护、通感一体化，并在紫金山实验室、移动通信国家重点实验室、江苏省网络与信息安全重点实验室、北京大学 FineLab 等平台开展科研训练。
+                I am an undergraduate researcher in Cryptography at the School of Cyber Science and Engineering, Southeast University. My work explores security, reliability, and explainable diagnosis in highly connected systems, with applications in multi-agent systems, UAV swarms, cryptography and privacy, and integrated sensing and communication. I am a member of the Communist Party of China and a student member of the "Five-Colored Stone Program" for endogenous security at Purple Mountain Laboratories. I am also an IEEE Student Member and a member of the IEEE Signal Processing Society (SPS). In September 2027, I will begin a PhD in Software Engineering at the School of Software and Microelectronics, Peking University.
               </p>
-              <div class="metric-strip" aria-label="个人概览">
-                <div class="metric">
-                  <strong>6</strong>
-                  <span>绩点排名</span>
-                </div>
-                <div class="metric">
-                  <strong>2</strong>
-                  <span>综合测评排名</span>
-                </div>
-                <div class="metric">
-                  <strong>36.3</strong>
-                  <span>SRTP 学分</span>
-                </div>
-                <div class="metric">
-                  <strong>333.5h</strong>
-                  <span>志愿服务时长</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-research">
-              <span class="hero-research-label">FOCUS AREAS</span>
-              <div class="research-map" aria-label="研究方向">
-                <div class="map-node"><b>MAS Security</b>多智能体系统中的风险传播、恶意信息阻断与故障归因</div>
-                <div class="map-node"><b>UAV Swarms</b>无人集群通信、认证、可靠性建模与拓扑优化</div>
-                <div class="map-node"><b>Cryptography</b>身份认证与密钥协商、隐私保护与威胁模型分析</div>
-                <div class="map-node"><b>ISAC</b>WiFi 通感定位、CSI/BFM 建模与射频指纹识别</div>
+              <h3 class="study-heading" id="study-title">Study Experience</h3>
+              <div class="bio-path" aria-labelledby="study-title">
+                <a class="bio-path-item" href="https://med.seu.edu.cn/" target="_blank" rel="noreferrer" title="School of Medicine, Southeast University">
+                  <strong class="study-date">2022–2023</strong>
+                  <img class="study-logo" src="assets/医学院logo.webp" alt="Southeast University School of Medicine logo" width="64" height="64" loading="lazy" decoding="async">
+                  <div class="study-details">
+                    <strong class="study-university">Southeast University</strong>
+                    <span class="study-school">School of Medicine</span>
+                    <span class="study-degree">Medical Imaging</span>
+                  </div>
+                </a>
+                <a class="bio-path-item" href="https://math.seu.edu.cn/" target="_blank" rel="noreferrer" title="School of Mathematics, Southeast University">
+                  <strong class="study-date">2023–2024</strong>
+                  <img class="study-logo" src="assets/数学学院logo.jpg" alt="Southeast University School of Mathematics logo" width="64" height="64" loading="lazy" decoding="async">
+                  <div class="study-details">
+                    <strong class="study-university">Southeast University</strong>
+                    <span class="study-school">School of Mathematics</span>
+                    <span class="study-degree">Science Experimental Class</span>
+                  </div>
+                </a>
+                <a class="bio-path-item" href="https://cyber.seu.edu.cn/" target="_blank" rel="noreferrer" title="School of Cyber Science and Engineering, Southeast University">
+                  <strong class="study-date">2024–2027</strong>
+                  <img class="study-logo" src="assets/网络空间安全学院logo.jpg" alt="Southeast University School of Cyber Science and Engineering logo" width="64" height="64" loading="lazy" decoding="async">
+                  <div class="study-details">
+                    <strong class="study-university">Southeast University</strong>
+                    <span class="study-school">School of Cyber Science and Engineering</span>
+                    <span class="study-degree">Bach. Eng. Cryptography Science and Technology</span>
+                  </div>
+                </a>
+                <a class="bio-path-item" href="https://ss.pku.edu.cn/" target="_blank" rel="noreferrer" title="School of Software and Microelectronics, Peking University">
+                  <strong class="study-date">From Sep. 2027</strong>
+                  <img class="study-logo" src="assets/标志_红色.png" alt="Peking University logo" width="64" height="64" loading="lazy" decoding="async">
+                  <div class="study-details">
+                    <strong class="study-university">Peking University</strong>
+                    <span class="study-school">School of Software and Microelectronics</span>
+                    <span class="study-degree">PhD. Eng. Software Engineering</span>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
@@ -1652,68 +1967,34 @@
       <img src="assets/大礼堂-连续.svg" alt="">
     </div>
 
-    <section class="section campus-mark hall-horizontal" id="about">
-      <div class="shell">
-        <div class="section-head">
-          <div>
-            <div class="kicker">PROFILE</div>
-            <h2>面向安全与智能系统的本科经历</h2>
-          </div>
-          <p>
-            目前关注高度互联系统中的安全性、可靠性与可解释诊断问题，尝试把图神经网络、密码协议分析、复杂网络建模和大语言模型结合到无人集群、多智能体系统与通感一体化场景中。
-          </p>
-        </div>
-          <div class="panel">
-            <div class="edu-card">
-              <img src="assets/东南大学彩色校标.svg" alt="东南大学校徽">
-              <div>
-                <h3>东南大学 Southeast University</h3>
-                <p>2022.08-2023.07，医学院，临床医学类（医学影像学）；</p>
-                <p>2023.08-2024.07，数学学院，理科试验班；</p>
-                <p>2024.08 至今，网络空间安全学院，密码科学与技术。</p>
-              </div>
-            </div>
-            <ul class="fact-list">
-              <li><b>身份</b><span>中共党员，紫金山实验室内生安全“五色石计划”学生成员</span></li>
-              <li><b>语言</b><span>CET-4：513，CET-6：604</span></li>
-              <li><b>审稿</b><span>ACM MM '26 及其 Dataset Track 审稿人</span></li>
-            </ul>
-            <img class="campus-line-art" src="assets/大礼堂-独立.svg" alt="" aria-hidden="true">
-          </div>
-        </div>
-    </section>
-
     <section class="section alt campus-pattern pine-mark" id="research">
       <div class="shell">
         <div class="section-head">
           <div>
             <div class="kicker">RESEARCH</div>
-            <h2>研究兴趣</h2>
+            <h2>Research Interests</h2>
           </div>
-          <p>
-            研究问题主要从“复杂系统如何被攻击、如何被诊断、如何被优化”展开，连接密码学安全性证明、图学习、无线感知与智能体协作机制。
-          </p>
         </div>
         <div class="interest-grid">
           <article class="interest">
             <div class="num">01</div>
-            <h3>多智能体系统</h3>
-            <p>恶意信息传播、风险熵建模、动态可信锚点与故障归因。</p>
+            <h3>Multi-Agent Systems</h3>
+            <p>Malicious information propagation, risk entropy modeling, dynamic trust anchors, and fault attribution.</p>
           </article>
           <article class="interest">
             <div class="num">02</div>
-            <h3>无人集群系统</h3>
-            <p>UAV/USV 协同网络、可靠性评估、复杂网络重要度排序。</p>
+            <h3>UAV Swarms</h3>
+            <p>Cooperative UAV/USV networks, reliability assessment, and importance ranking in complex networks.</p>
           </article>
           <article class="interest">
             <div class="num">03</div>
-            <h3>密码学与隐私保护</h3>
-            <p>HECC 认证密钥协商、eCK 敌手模型、节点捕获与临时密钥泄露。</p>
+            <h3>Cryptography and Privacy</h3>
+            <p>HECC authentication and key agreement, eCK adversary models, node capture, and temporary key exposure.</p>
           </article>
           <article class="interest">
             <div class="num">04</div>
-            <h3>通感一体化</h3>
-            <p>WiFi BFM/CSI 数据建模、STGCN 定位、射频指纹身份识别。</p>
+            <h3>Integrated Sensing and Communication</h3>
+            <p>WiFi BFM/CSI modeling, STGCN localization, and radio-frequency fingerprint identification.</p>
           </article>
         </div>
       </div>
@@ -1724,33 +2005,66 @@
         <div class="section-head">
           <div>
             <div class="kicker">HIGHLIGHTS</div>
-            <h2>近期亮点</h2>
+            <h2>Recent Highlights</h2>
           </div>
-          <p>
-            以下按公开主页展示口径整理，保留已录用、已出版、在投和合作工作状态，便于访问者快速理解研究轨迹。
-          </p>
         </div>
-        <div class="highlight-grid">
-          <a class="highlight" href="https://arxiv.org/abs/2605.28214" target="_blank" rel="noreferrer">
-            <span class="tag">arXiv preprint</span>
-            <h3>揭示多智能体系统中的潜在攻击</h3>
-            <p>围绕 latent-based 多智能体系统中的潜在攻击展开分析。</p>
-          </a>
-          <a class="highlight" href="https://arxiv.org/abs/2511.14684" target="_blank" rel="noreferrer">
-            <span class="tag blue">arXiv preprint</span>
-            <h3>基于 LLM 的学生推理对齐与数学错误纠正</h3>
-            <p>SMRC 面向数学错误纠正，将学生推理与大语言模型纠错过程对齐。</p>
-          </a>
-          <a class="highlight" href="#publications">
-            <span class="tag coral">ACL Findings '26</span>
-            <h3>风险驱动的 MAS 恶意信息阻断</h3>
-            <p>利用图神经网络监测交互动态，并通过分层拓扑优化抑制恶意传播。</p>
-          </a>
-          <a class="highlight" href="#publications">
-            <span class="tag gold">ICML '26</span>
-            <h3>高效可进化 LLM 代理工具编排</h3>
-            <p>EvoC2F 通过中间表示优化自主代理的工具编排、执行效率和可靠性。</p>
-          </a>
+        <div class="highlight-window" aria-label="Recent highlights carousel" tabindex="0">
+          <div class="highlight-grid">
+            <a class="highlight" href="https://arxiv.org/abs/2608.25622" target="_blank" rel="noreferrer">
+              <span class="tag">2026 · <i class="venue-name">EMNLP</i></span>
+              <h3>Plans You Can Check</h3>
+              <p>Accepted. Co-first author.</p>
+            </a>
+            <a class="highlight" href="https://arxiv.org/abs/2605.28214" target="_blank" rel="noreferrer">
+              <span class="tag">2026 · <i class="venue-name">EMNLP</i></span>
+              <h3>Out of Sight, Not Out of Mind</h3>
+              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
+              <p>Accepted. Co-first author.</p>
+            </a>
+            <a class="highlight" href="#pub-causal-abstention">
+              <span class="tag">2026 · <i class="venue-name">EMNLP</i></span>
+              <h3>Causal Abstention</h3>
+              <div class="paper-badges"><span class="paper-badge oral">Oral</span><span class="paper-badge award">Award Nomination</span></div>
+              <p>Accepted. Co-first author.</p>
+            </a>
+            <a class="highlight" href="https://arxiv.org/abs/2511.14684" target="_blank" rel="noreferrer">
+              <span class="tag coral">2026 · <i class="venue-name">EMNLP Findings</i></span>
+              <h3>SMRC</h3>
+              <p>Accepted to Findings. Aligning language models with student reasoning for mathematical error correction.</p>
+            </a>
+            <a class="highlight" href="#publications">
+              <span class="tag coral">2026 · <i class="venue-name">ACL Findings</i></span>
+              <h3>TopoSHIELD</h3>
+              <p>Risk-aware topological evolution for disrupting malicious information flow in multi-agent systems.</p>
+            </a>
+            <a class="highlight" href="#publications">
+              <span class="tag gold">2026 · <i class="venue-name">ICML</i></span>
+              <h3>EvoC2F</h3>
+              <p>Compiling tool orchestration for efficient and evolvable large language model agents.</p>
+            </a>
+            <a class="highlight" href="https://doi.org/10.1109/TVT.2026.3658329" target="_blank" rel="noreferrer">
+              <span class="tag blue">2026 · <i class="venue-name">IEEE T-VT</i></span>
+              <h3>HECC Authentication for UAV SAR Networks</h3>
+              <p>A robust authentication and key agreement scheme for UAV-enabled search and rescue networks.</p>
+            </a>
+            <a class="highlight" href="https://doi.org/10.1109/ICASSP55912.2026.11463151" target="_blank" rel="noreferrer">
+              <span class="tag">2026 · <i class="venue-name">ICASSP</i></span>
+              <h3>STAR-RFF</h3>
+              <p>Spatio-temporal sensing assisted radio-frequency fingerprint identification via STGCN.</p>
+            </a>
+            <a class="highlight" href="https://doi.org/10.1145/3805622.3810789" target="_blank" rel="noreferrer">
+              <span class="tag blue">2026 · <i class="venue-name">ICMR</i></span>
+              <h3>Audio Learning with Synthetic Pre-training</h3>
+              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
+              <p>Procedural generation for synthetic pre-training and audio representation learning.</p>
+            </a>
+            <a class="highlight" href="https://doi.org/10.1007/978-981-96-9921-6_39" target="_blank" rel="noreferrer">
+              <span class="tag gold">2025 · <i class="venue-name">ICIC</i></span>
+              <h3>Spherical Vector Particle Swarm Optimization</h3>
+              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
+              <p>Smooth path planning based on spherical vector particle swarm optimization.</p>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1760,39 +2074,40 @@
         <div class="section-head">
           <div>
             <div class="kicker">EXPERIENCE</div>
-            <h2>主要科研实习</h2>
+            <h2>Research Experience</h2>
           </div>
-          <p>
-            从密码协议设计到多智能体系统安全，再到无人集群可靠性和无线通感，项目之间共享一个核心问题：在开放、复杂、动态的系统中建立可信运行机制。
-          </p>
         </div>
         <div class="timeline">
           <a class="timeline-item" href="https://github.com/pku-finelab" target="_blank" rel="noreferrer">
-            <div class="time">2025.07-Now</div>
-            <div>
-              <h3>北京大学软件与微电子学院FineLab实验室</h3>
-              <p>智能软件系统中的安全防御与可靠性分析。</p>
+            <img class="research-logo" src="assets/标志_红色.png" alt="Peking University logo" width="80" height="80" loading="lazy" decoding="async">
+            <div class="time">2025.07–Present</div>
+            <div class="timeline-copy">
+              <h3>FineLab, School of Software and Microelectronics, Peking University</h3>
+              <p>Security defense and reliability analysis for intelligent software systems.</p>
             </div>
           </a>
           <a class="timeline-item" href="https://www.pmlabs.com.cn/" target="_blank" rel="noreferrer">
-            <div class="time">2024.10-Now</div>
-            <div>
-              <h3>东南大学紫金山实验室（PML）</h3>
-              <p>无人集群系统在多重攻击下的安全性与可靠性评估。</p>
+            <img class="research-logo" src="assets/紫金山实验室.jpeg" alt="Purple Mountain Laboratories logo" width="80" height="80" loading="lazy" decoding="async">
+            <div class="time">2024.10–Present</div>
+            <div class="timeline-copy">
+              <h3>Purple Mountain Laboratories, Southeast University</h3>
+              <p>Security and reliability assessment of UAV swarm systems under multiple attacks.</p>
             </div>
           </a>
           <a class="timeline-item" href="https://ncrl.seu.edu.cn/" target="_blank" rel="noreferrer">
-            <div class="time">2024.10-Now</div>
-            <div>
-              <h3>东南大学移动通信国家重点实验室（NCRL）</h3>
-              <p>室内WiFi通信感知定位与身份识别的一体化研究。</p>
+            <img class="research-logo" src="assets/移动通信国家重点实验室.jpg" alt="National Mobile Communications Research Laboratory logo" width="80" height="80" loading="lazy" decoding="async">
+            <div class="time">2024.10–Present</div>
+            <div class="timeline-copy">
+              <h3>National Key Laboratory of Mobile Communications, Southeast University</h3>
+              <p>Integrated indoor WiFi communication, sensing, localization, and identification.</p>
             </div>
           </a>
           <a class="timeline-item" href="http://jssec.seu.edu.cn/index.html" target="_blank" rel="noreferrer">
-            <div class="time">2024.10-2025.09</div>
-            <div>
-              <h3>江苏省网络与信息安全重点实验室</h3>
-              <p>基于LLM的Tor暗网流量未知威胁发现与研究。</p>
+            <img class="research-logo" src="assets/东大计院.jpg" alt="Southeast University School of Computer Science and Engineering logo" width="80" height="80" loading="lazy" decoding="async">
+            <div class="time">2024.10–2025.09</div>
+            <div class="timeline-copy">
+              <h3>Jiangsu Key Laboratory of Network and Information Security, Southeast University</h3>
+              <p>LLM-based discovery of unknown threats in Tor darknet traffic.</p>
             </div>
           </a>
         </div>
@@ -1804,49 +2119,59 @@
         <div class="section-head">
           <div>
             <div class="kicker">PUBLICATIONS</div>
-            <h2>论文成果</h2>
+            <h2>Publications</h2>
           </div>
-          <p>
-            点击论文卡片可跳转到出版页。“†”为共同第一作者，“✉”为通讯作者。
-          </p>
         </div>
-        <div class="publication-list">
-          <a class="publication" href="https://doi.org/10.1109/TVT.2026.3658329" target="_blank" rel="noreferrer">
+        <div class="publication-window" aria-label="Publication list" tabindex="0">
+          <div class="publication-list">
+          <article class="publication publication-with-code" id="pub-tvt" aria-labelledby="pub-tvt-title">
             <div class="publication-meta">
               <span class="venue">IEEE T-VT</span>
               <span class="rank sci">JCR Q1</span>
+              <a class="publication-code" href="https://github.com/NoWall-572/NS-3_Communication_Simulation_for_AKAs" target="_blank" rel="noreferrer" aria-label="Code repository for HECC Authentication" title="GitHub: NoWall-572/NS-3_Communication_Simulation_for_AKAs">
+                <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
+                <span>CODE</span>
+              </a>
             </div>
             <div>
-              <h3>A Robust HECC-based Authentication and Key Agreement for UAV-enabled SAR Networks</h3>
+              <h3 id="pub-tvt-title"><a class="publication-link" href="https://doi.org/10.1109/TVT.2026.3658329" target="_blank" rel="noreferrer">A Robust HECC-based Authentication and Key Agreement for UAV-enabled SAR Networks</a></h3>
               <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>, Ning Gao✉, Qiang Ni, Shi Jin · First Author</p>
-              <p>IEEE Transactions on Vehicular Technology，已录用并出版。</p>
+              <p><i class="venue-name">IEEE Transactions on Vehicular Technology</i> · Published.</p>
               <p class="doi"><b>DOI:</b> 10.1109/TVT.2026.3658329</p>
             </div>
-          </a>
-          <a class="publication" href="https://doi.org/10.1109/ICASSP55912.2026.11463151" target="_blank" rel="noreferrer">
-            <div class="publication-meta">
-              <span class="venue">ICASSP '26</span>
-              <span class="rank ccf-b">CCF-B</span>
-            </div>
-            <div>
-              <h3>STAR-RFF: Spatio-Temporal Sensing Assisted Robust Radio Frequency Fingerprint Identification Via STGCN</h3>
-              <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>†, Chaoyue Yang†, Like Ren, Fengrui Liu, Yifan Wu, Ning Gao✉, Shi Jin · First Author</p>
-              <p>IEEE International Conference on Acoustics, Speech, and Signal Processing，已录用并出版。</p>
-              <p class="doi"><b>DOI:</b> 10.1109/ICASSP55912.2026.11463151</p>
-            </div>
-          </a>
-          <a class="publication" href="https://doi.org/10.18653/v1/2026.findings-acl.426" target="_blank" rel="noreferrer">
+          </article>
+          <article class="publication publication-with-code" id="pub-toposhield" aria-labelledby="pub-toposhield-title">
             <div class="publication-meta">
               <span class="venue">ACL '26</span>
               <span class="rank ccf-a">Findings</span>
+              <a class="publication-code" href="https://github.com/NoWall-572/TopoSHIELD" target="_blank" rel="noreferrer" aria-label="Code repository for TopoSHIELD" title="GitHub: NoWall-572/TopoSHIELD">
+                <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
+                <span>CODE</span>
+              </a>
             </div>
             <div>
-              <h3>TopoSHIELD: Reshaping the Flow of Malice via Spatio-Temporal Risk-Aware Topological Evolution in Multi-Agent Systems</h3>
+              <h3 id="pub-toposhield-title"><a class="publication-link" href="https://doi.org/10.18653/v1/2026.findings-acl.426" target="_blank" rel="noreferrer">TopoSHIELD: Reshaping the Flow of Malice via Spatio-Temporal Risk-Aware Topological Evolution in Multi-Agent Systems</a></h3>
               <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>†, Chenxi Wang†, Tinghe Zhang, Fengrui Liu, Jiayan Sun, Haocheng Wang, and Yifan Wu✉ · First Author</p>
-              <p>Findings of the Association for Computational Linguistics: ACL 2026，已录用并出版。</p>
+              <p><i class="venue-name">Findings of the Association for Computational Linguistics: ACL 2026</i> · Published.</p>
               <p class="doi"><b>DOI:</b> 10.18653/V1/2026.FINDINGS-ACL.426</p>
             </div>
-          </a>
+          </article>
+          <article class="publication publication-with-code" id="pub-star-rff" aria-labelledby="pub-star-rff-title">
+            <div class="publication-meta">
+              <span class="venue">ICASSP '26</span>
+              <span class="rank ccf-b">CCF-B</span>
+              <a class="publication-code" href="https://github.com/NoWall-572/BFI-Acquisition-Tutorial" target="_blank" rel="noreferrer" aria-label="Code repository for STAR-RFF" title="GitHub: NoWall-572/BFI-Acquisition-Tutorial">
+                <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
+                <span>CODE</span>
+              </a>
+            </div>
+            <div>
+              <h3 id="pub-star-rff-title"><a class="publication-link" href="https://doi.org/10.1109/ICASSP55912.2026.11463151" target="_blank" rel="noreferrer">STAR-RFF: Spatio-Temporal Sensing Assisted Robust Radio Frequency Fingerprint Identification Via STGCN</a></h3>
+              <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>†, Chaoyue Yang†, Like Ren, Fengrui Liu, Yifan Wu, Ning Gao✉, Shi Jin · First Author</p>
+              <p><i class="venue-name">IEEE International Conference on Acoustics, Speech, and Signal Processing</i> · Published.</p>
+              <p class="doi"><b>DOI:</b> 10.1109/ICASSP55912.2026.11463151</p>
+            </div>
+          </article>
           <a class="publication" href="https://icml.cc/virtual/2026/poster/63166" target="_blank" rel="noreferrer">
             <div class="publication-meta">
               <span class="venue">ICML '26</span>
@@ -1855,20 +2180,88 @@
             <div>
               <h3>EvoC2F: Compiling Tool Orchestration for Efficient and Evolvable LLM Agents</h3>
               <p class="authors"><b>Authors:</b> Lei Wei†, Qi Liu†, <u>Ruiyang Huang</u>†, Xiao Peng, Sicong Xie, Lanbo Lin, Chenhao Jiang, Yuanwu Xu, Tianyuan Yang, Jiayao Liu, Li Cai, Yuying Li, Bin Wang✉ · Co-first Author</p>
-              <p>Proceedings of the 43rd International Conference on Machine Learning，已录用。</p>
+              <p><i class="venue-name">Proceedings of the 43rd International Conference on Machine Learning</i> · Accepted.</p>
               <p class="doi"><b>DOI:</b> forthcoming</p>
             </div>
           </a>
-          <a class="publication" href="https://doi.org/10.1145/3805622.3810789" target="_blank" rel="noreferrer">
+          <a class="publication" id="pub-out-of-sight" href="https://arxiv.org/abs/2605.28214" target="_blank" rel="noreferrer">
             <div class="publication-meta">
-              <span class="venue">ICMR '26</span>
+              <span class="venue">EMNLP '26</span>
               <span class="rank ccf-b">CCF-B</span>
             </div>
             <div>
-              <h3>From Physics to Representation: Audio Learning with Synthetic Pre-training via Procedural Generation</h3>
+              <h3>Out of Sight, Not Out of Mind: Unveiling Latent Attack in Latent-based Multi-Agent Systems</h3>
+              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
+              <p class="authors"><b>Authors:</b> Chenxi Wang<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, <u>Ruiyang Huang</u><sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Jiayan Sun<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Lei Wei<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Yifan Wu<sup title="Corresponding author" aria-label="Corresponding author">✉</sup> · Co-first Author</p>
+              <p><i class="venue-name">Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing</i> · Accepted & Preprinted.</p>
+              <p class="doi"><b>arXiv:</b> 2605.28214</p>
+            </div>
+          </a>
+          <article class="publication pending-link" id="pub-causal-abstention" aria-labelledby="causal-abstention-title">
+            <div class="publication-meta">
+              <span class="venue">EMNLP '26</span>
+              <span class="rank ccf-b">CCF-B</span>
+            </div>
+            <div>
+              <h3 id="causal-abstention-title">Causal Abstention for Cost-Aware Language-Agent Collaboration</h3>
+              <div class="paper-badges"><span class="paper-badge oral">Oral</span><span class="paper-badge award">Award Nomination</span></div>
+              <p class="authors"><b>Authors:</b> Lei Wei<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, <u>Ruiyang Huang</u><sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Zhaolu Kang<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Qi Liu<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Xiao Peng, Haoran Liu, Zonghao Ying, Haoyu Wang, Ye Shen, Xu Dong, Hongyu Li, Kesu Wang, Yukun Lian, Sicong Xie<sup title="Corresponding author" aria-label="Corresponding author">✉</sup> · Co-first Author</p>
+              <p><i class="venue-name">Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing</i> · Accepted.</p>
+              <p class="doi">Paper link forthcoming.</p>
+            </div>
+          </article>
+          <a class="publication" id="pub-plans-you-can-check" href="https://arxiv.org/abs/2608.25622" target="_blank" rel="noreferrer">
+            <div class="publication-meta">
+              <span class="venue">EMNLP '26</span>
+              <span class="rank ccf-b">CCF-B</span>
+            </div>
+            <div>
+              <h3>Plans You Can Check: Verifier-Grounded Learning of an Open-Weight Planner for Executable Video-Editing</h3>
+              <p class="authors"><b>Authors:</b> Haoyu Wang<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Cheng Feng<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Liuyang Bian<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, <u>Ruiyang Huang</u><sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Lei Wei, Yafei Wen, Xiaoxin Chen, Xiaoying Tang<sup title="Corresponding author" aria-label="Corresponding author">✉</sup> · Co-first Author</p>
+              <p><i class="venue-name">Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing</i> · Accepted & Preprinted.</p>
+              <p class="doi"><b>arXiv:</b> 2608.25622</p>
+            </div>
+          </a>
+          <a class="publication" id="pub-prp" href="https://doi.org/10.1109/TASLPRO.2026.3724415" target="_blank" rel="noreferrer">
+            <div class="publication-meta">
+              <span class="venue">IEEE T-ASLP</span>
+              <span class="rank sci">JCR Q1</span>
+              <span class="rank ccf-b">CCF-B</span>
+            </div>
+            <div>
+              <h3>PRP: Procedural-to-Real Masked Pre-Training for Transferable and Interpretable Audio Representations</h3>
+              <p class="authors"><b>Authors:</b> Fengrui Liu, <u>Ruiyang Huang</u>, Qijian Zheng, Yuanfang Wang, Feng Liu<sup title="Corresponding author" aria-label="Corresponding author">✉</sup> · Second Author</p>
+              <p><i class="venue-name">IEEE Transactions on Audio, Speech and Language Processing</i> · Published.</p>
+              <p class="doi"><b>DOI:</b> 10.1109/TASLPRO.2026.3724415</p>
+            </div>
+          </a>
+          <article class="publication publication-with-code" id="pub-audiopg" aria-labelledby="pub-audiopg-title">
+            <div class="publication-meta">
+              <span class="venue">ICMR '26</span>
+              <span class="rank ccf-b">CCF-B</span>
+              <a class="publication-code" href="https://github.com/Freyliu0516/audioPG" target="_blank" rel="noreferrer" aria-label="Code repository for Audio Learning with Synthetic Pre-training" title="GitHub: Freyliu0516/audioPG">
+                <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
+                <span>CODE</span>
+              </a>
+            </div>
+            <div>
+              <h3 id="pub-audiopg-title"><a class="publication-link" href="https://doi.org/10.1145/3805622.3810789" target="_blank" rel="noreferrer">From Physics to Representation: Audio Learning with Synthetic Pre-training via Procedural Generation</a></h3>
+              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
               <p class="authors"><b>Authors:</b> Fengrui Liu, <u>Ruiyang Huang</u>, Qijian Zheng, Yuanfang Wang, Feng Liu✉ · Second Author</p>
-              <p>Proceedings of the 2026 International Conference on Multimedia Retrieval，已录用并出版。</p>
+              <p><i class="venue-name">Proceedings of the 2026 International Conference on Multimedia Retrieval</i> · Published.</p>
               <p class="doi"><b>DOI:</b> 10.1145/3805622.3810789</p>
+            </div>
+          </article>
+          <a class="publication" id="pub-smrc" href="https://arxiv.org/abs/2511.14684" target="_blank" rel="noreferrer">
+            <div class="publication-meta">
+              <span class="venue">EMNLP '26</span>
+              <span class="rank ccf-a">Findings</span>
+            </div>
+            <div>
+              <h3>SMRC: Aligning Large Language Models with Student Reasoning for Mathematical Error Correction</h3>
+              <p class="authors"><b>Authors:</b> Biaojie Zeng, Min Zhang<sup title="Corresponding author" aria-label="Corresponding author">✉</sup>, Juan Zhou, Fengrui Liu, <u>Ruiyang Huang</u>, Yu Song, Xin Lin</p>
+              <p><i class="venue-name">Findings of the Association for Computational Linguistics: EMNLP 2026</i> · Accepted & Preprinted.</p>
+              <p class="doi"><b>arXiv:</b> 2511.14684</p>
             </div>
           </a>
           <a class="publication" href="https://doi.org/10.1007/978-981-96-9921-6_39" target="_blank" rel="noreferrer">
@@ -1878,11 +2271,13 @@
             </div>
             <div>
               <h3>Smooth Path Planning Based on Spherical Vector Particle Swarm Optimization</h3>
+              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
               <p class="authors"><b>Authors:</b> Wenting Su, Zixuan Liu✉, <u>Ruiyang Huang</u> · Third Author</p>
-              <p>Advanced Intelligent Computing Technology and Applications，已录用并出版。</p>
+              <p><i class="venue-name">Advanced Intelligent Computing Technology and Applications</i> · Published.</p>
               <p class="doi"><b>DOI:</b> 10.1007/978-981-96-9921-6_39</p>
             </div>
-          </a>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1892,38 +2287,68 @@
         <div class="section-head">
           <div>
             <div class="kicker">HONORS</div>
-            <h2>奖项与竞赛</h2>
+            <h2>Honors and Competitions</h2>
           </div>
-          <p>
-            除科研训练外，也持续参与创新创业、信息安全竞赛和志愿服务，覆盖国家级、省级与校级成果。
-          </p>
         </div>
         <div class="honor-grid">
-          <article class="honor-card">
-            <h3>奖学金与荣誉</h3>
-            <ul>
-              <li>2024 年策腾智能奖学金</li>
-              <li>2024 年东南大学“至善学子”奖学金</li>
-              <li>2026 年优秀共青团员</li>
-              <li>2023、2025 年东南大学单项奖</li>
-            </ul>
+          <article class="honor-group">
+            <h3 id="scholarships-title">Scholarships and Honors</h3>
+            <div class="honor-card" role="region" aria-labelledby="scholarships-title" tabindex="0">
+              <ul>
+                <li>2024 Ceteng Intelligence Scholarship</li>
+                <li>2024 Southeast University Zhishan Student Scholarship</li>
+                <li>2026 Outstanding Communist Youth League Member</li>
+                <li>2023 and 2025 Southeast University Individual Awards</li>
+                <li>2023 and 2024 Jiangsu Outstanding Volunteer</li>
+                <li>2024 Southeast University Outstanding Volunteer</li>
+                <li>Five-Star Volunteer of Southeast University</li>
+              </ul>
+            </div>
           </article>
-          <article class="honor-card">
-            <h3>志愿服务</h3>
-            <ul>
-              <li>2023、2024 年江苏省优秀志愿者</li>
-              <li>2024 年东南大学校级优秀志愿者</li>
-              <li>东南大学五星级志愿者</li>
-            </ul>
+          <article class="honor-group">
+            <h3 id="competitions-title">Innovation Competitions</h3>
+            <div class="honor-card" role="region" aria-labelledby="competitions-title" tabindex="0">
+              <ul>
+                <li>2024 China International College Students Innovation Competition · Bronze Award</li>
+                <li>2025 National College Students Information Security Competition · Second Prize</li>
+                <li>2023 National College Students Life Science Competition · Bronze Award</li>
+                <li>2024 and 2025 Jiangsu College Students Innovation Competition · Second Prize</li>
+              </ul>
+            </div>
           </article>
-          <article class="honor-card">
-            <h3>创新竞赛</h3>
-            <ul>
-              <li>2024 年中国国际大学生创新大赛，铜奖</li>
-              <li>2025 年全国大学生信息安全竞赛（作品赛），二等奖</li>
-              <li>2023 年全国大学生生命科学竞赛（创新创业类），铜奖</li>
-              <li>2024、2025 年“建行杯”江苏省大学生创新大赛，二等奖</li>
-            </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt campus-pattern service-section" id="service">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="kicker">ACADEMIC SERVICE</div>
+            <h2>Academic Service</h2>
+          </div>
+        </div>
+        <div class="service-grid">
+          <article class="service-group">
+            <h3 id="conference-reviewing-title">Conference Reviewing</h3>
+            <div class="service-card" role="region" aria-labelledby="conference-reviewing-title" tabindex="0">
+              <ul>
+                <li><i class="venue-name">ACM MM</i> '26, Reviewer.</li>
+                <li><i class="venue-name">ACM MM</i> '26 Dataset Track, Reviewer.</li>
+                <li><i class="venue-name">NeurIPS</i> '26, Reviewer.</li>
+                <li><i class="venue-name">ICLR</i> '27, Reviewer.</li>
+                <li><i class="venue-name">IEEE ICASSP</i> '27, Reviewer.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="service-group">
+            <h3 id="journal-reviewing-title">Journal Reviewing</h3>
+            <div class="service-card" role="region" aria-labelledby="journal-reviewing-title" tabindex="0">
+              <ul>
+                <li><i class="venue-name">IEEE T-NSM</i>, Reviewer.</li>
+                <li><i class="venue-name">IEEE IoTJ</i>, Reviewer.</li>
+              </ul>
+            </div>
           </article>
         </div>
       </div>
@@ -1934,13 +2359,10 @@
         <div class="section-head">
           <div>
             <div class="kicker">CONTACT</div>
-            <h2>联系与链接</h2>
+            <h2>Contact</h2>
           </div>
-          <p>
-            欢迎围绕多智能体系统安全、无人集群可靠性、密码协议设计、无线通感与智能体工具编排等方向交流。
-          </p>
         </div>
-        <img class="contact-lockup" src="assets/东南大学彩色中英文字校标组合-左右.svg" alt="东南大学 Southeast University">
+        <img class="contact-lockup" src="assets/东南大学彩色中英文字校标组合-左右.svg" alt="Southeast University">
         <div class="contact">
           <a class="contact-card" href="mailto:ryhuang_572@seu.edu.cn">
             <span>School Email</span>
@@ -1974,7 +2396,7 @@
       <footer>
         <div class="shell footer-inner">
           <img class="footer-mark" src="assets/东南大学标准字-横排.svg" alt="" aria-hidden="true">
-          <span>© 2026 Ruiyang Huang. Built for GitHub Pages from resume materials.</span>
+          <span>© 2026 Ruiyang Huang. Built for GitHub Pages.</span>
         </div>
       </footer>
     </div>
@@ -1982,6 +2404,37 @@
   <script>
     (() => {
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const publicationWindow = document.querySelector(".publication-window");
+      const publicationList = document.querySelector(".publication-list");
+
+      if (publicationWindow && publicationList) {
+        const resizePublicationWindow = () => {
+          const cards = Array.from(publicationList.children);
+          const compact = window.matchMedia("(max-width: 640px)").matches;
+          const fullCards = compact ? 1 : 3;
+          if (cards.length <= fullCards) return;
+
+          // Use actual card heights so a partial card stays visible after text reflows.
+          const gap = parseFloat(getComputedStyle(publicationList).rowGap) || 0;
+          const padding = parseFloat(getComputedStyle(publicationWindow).paddingTop) || 0;
+          let height = padding + fullCards * gap
+            + cards.slice(0, fullCards).reduce((sum, card) => sum + card.getBoundingClientRect().height, 0)
+            + cards[fullCards].getBoundingClientRect().height / 2;
+
+          if (compact) {
+            const headerHeight = document.querySelector(".topbar")?.offsetHeight || 0;
+            height = Math.min(height, Math.max(320, window.innerHeight - headerHeight - 24));
+          }
+          publicationWindow.style.setProperty("--publication-window-height", `${Math.round(height)}px`);
+        };
+
+        resizePublicationWindow();
+        window.addEventListener("resize", resizePublicationWindow);
+        if ("ResizeObserver" in window) {
+          new ResizeObserver(resizePublicationWindow).observe(publicationList);
+        }
+        document.fonts.ready.then(resizePublicationWindow);
+      }
 
       const scrollToHash = (hash, behavior = "auto") => {
         if (!hash || hash === "#") return;
