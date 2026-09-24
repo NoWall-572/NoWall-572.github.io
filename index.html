@@ -48,7 +48,6 @@
     h2,
     h1 span,
     .study-heading,
-    .highlight h3,
     .publication h3,
     .honor-group > h3,
     .service-group > h3 {
@@ -433,6 +432,7 @@
     }
 
     .bio-path-item {
+      position: relative;
       display: grid;
       grid-template-columns: 140px 64px minmax(0, 1fr);
       grid-template-areas: "date logo details";
@@ -453,7 +453,7 @@
       transform: translateY(-2px);
     }
 
-    .bio-path-item:focus-visible {
+    .bio-path-item:focus-within {
       outline: 3px solid rgba(88, 117, 88, 0.45);
       outline-offset: 3px;
     }
@@ -469,8 +469,40 @@
       grid-area: details;
       min-width: 0;
       display: grid;
-      gap: 3px;
+      gap: 7px;
       line-height: 1.45;
+    }
+
+    .study-school-link {
+      display: grid;
+      gap: 3px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .study-school-link::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    .study-mentors {
+      position: relative;
+      z-index: 1;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .study-mentors a {
+      color: var(--teal-dark);
+      text-decoration: underline;
+      text-decoration-color: rgba(88, 117, 88, 0.28);
+      text-underline-offset: 3px;
+    }
+
+    .study-mentors a:hover,
+    .study-mentors a:focus-visible {
+      text-decoration-color: currentColor;
     }
 
     .study-university {
@@ -933,16 +965,18 @@
     }
 
     .highlight-grid {
-      display: flex;
-      width: max-content;
-      gap: 16px;
+      display: grid;
+      padding: 10px 0;
     }
 
     .highlight-window {
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding: 4px 4px 14px 2px;
-      scroll-snap-type: x proximity;
+      height: clamp(320px, 44vh, 440px);
+      overflow-x: hidden;
+      overflow-y: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      scrollbar-gutter: stable;
       scrollbar-color: rgba(88, 117, 88, 0.58) transparent;
     }
 
@@ -963,21 +997,19 @@
     }
 
     .highlight {
-      display: block;
-      flex: 0 0 clamp(246px, 28vw, 310px);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 20px;
-      background: var(--white);
-      min-height: 210px;
-      scroll-snap-align: start;
-      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      column-gap: 20px;
+      align-items: start;
+      min-width: 0;
+      padding: 12px 20px;
+      color: inherit;
+      text-decoration: none;
+      transition: background-color 180ms ease;
     }
 
     .highlight:hover {
-      border-color: rgba(88, 117, 88, 0.42);
-      box-shadow: 0 16px 34px rgba(35, 24, 21, 0.1);
-      transform: translateY(-2px);
+      background: var(--mist);
     }
 
     .highlight:focus-visible {
@@ -985,45 +1017,37 @@
       outline-offset: 3px;
     }
 
-    .tag {
+    .highlight time {
       display: inline-flex;
       align-items: center;
-      gap: 0.3em;
-      min-height: 26px;
-      border-radius: 999px;
-      padding: 4px 10px;
+      justify-self: start;
+      white-space: nowrap;
+      min-height: 27px;
+      border-radius: 4px;
+      padding: 3px 8px;
       background: var(--mist);
       color: var(--teal-dark);
-      font-size: 0.78rem;
-      font-weight: 780;
-      margin-bottom: 16px;
-    }
-
-    .tag.coral {
-      background: #faeeee;
-      color: var(--coral);
-    }
-
-    .tag.gold {
-      background: #fbf1dc;
-      color: var(--gold);
-    }
-
-    .tag.blue {
-      background: #e8f2f6;
-      color: var(--blue);
-    }
-
-    .highlight h3 {
-      font-size: 1.1rem;
-      line-height: 1.45;
-      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
     }
 
     .highlight p {
-      color: var(--muted);
-      font-size: 0.94rem;
-      margin-bottom: 0;
+      min-width: 0;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .highlight-name {
+      color: var(--teal-dark);
+      font-weight: 700;
+    }
+
+    .highlight:hover .highlight-name {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .timeline {
@@ -1197,7 +1221,7 @@
 
     .publication {
       display: grid;
-      grid-template-columns: minmax(96px, 0.14fr) 1fr;
+      grid-template-columns: minmax(170px, 0.2fr) minmax(0, 1fr);
       gap: 18px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -1212,7 +1236,7 @@
       transform: translateY(-2px);
     }
 
-    .publication-with-code {
+    .publication-with-links {
       position: relative;
     }
 
@@ -1228,31 +1252,88 @@
     }
 
     .publication-link:focus-visible::after,
-    .publication-code:focus-visible {
+    .publication-actions a:focus-visible {
       outline: 3px solid rgba(37, 99, 235, 0.55);
       outline-offset: 3px;
     }
 
-    .publication-code {
+    .publication-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      margin-top: 9px;
+    }
+
+    .publication-actions a {
       position: relative;
       z-index: 1;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       min-height: 32px;
-      color: #2563eb;
       font-size: 0.8rem;
       font-weight: 700;
       line-height: 1;
+      text-decoration: none;
     }
 
-    .publication-code img {
+    .publication-code {
+      color: #2563eb;
+    }
+
+    .publication-code > img {
       width: 19px;
       height: 19px;
       flex: 0 0 19px;
     }
 
-    .publication-code:hover {
+    .publication-stars {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex: 0 0 auto;
+      min-width: 88px;
+      height: 36px;
+      margin-left: 5px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #f3f5f9;
+      color: #273244;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .star-glyph {
+      display: inline-block;
+      flex: 0 0 auto;
+      color: #dca300;
+      font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .star-count {
+      min-width: 2ch;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .publication-press {
+      color: #2563eb;
+    }
+
+    .publication-press svg {
+      width: 19px;
+      height: 19px;
+      fill: currentColor;
+    }
+
+    .publication-actions a:hover {
       text-decoration: underline;
       text-underline-offset: 3px;
     }
@@ -1314,28 +1395,44 @@
       margin-bottom: 10px;
     }
 
+    .publication-meta .paper-badges {
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 2px 0 0;
+    }
+
     .paper-badge {
       display: inline-flex;
       align-items: center;
-      min-height: 24px;
-      padding: 2px 8px;
-      border: 1px solid transparent;
-      border-radius: 4px;
+      gap: 6px;
+      min-height: 28px;
+      padding: 3px 9px;
+      border: 1px solid;
+      border-radius: 6px;
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       line-height: 1.5;
     }
 
     .paper-badge.oral {
-      color: var(--teal-dark);
-      border-color: rgba(88, 117, 88, 0.22);
-      background: var(--mist);
+      color: #79411f;
+      border-color: #c98a5a;
+      background: linear-gradient(135deg, #fff5e9, #efd0af 55%, #fff7ed);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.85), 0 2px 7px rgba(142, 80, 35, 0.15);
     }
 
     .paper-badge.award {
-      color: #80521a;
-      border-color: #e3c584;
-      background: #fbf1dc;
+      color: #765008;
+      border-color: #dfad38;
+      background: linear-gradient(135deg, #fffbe9, #ffdf86 55%, #fff8df);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(186, 123, 8, 0.18);
+    }
+
+    .medal-icon {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      filter: drop-shadow(0 2px 2px rgba(80, 50, 15, 0.25));
     }
 
     .publication h3 {
@@ -1792,7 +1889,13 @@
       }
 
       .highlight {
-        flex-basis: min(78vw, 300px);
+        grid-template-columns: 78px minmax(0, 1fr);
+        column-gap: 10px;
+        padding: 12px 10px;
+      }
+
+      .highlight p {
+        font-size: 0.92rem;
       }
 
       .publication,
@@ -1841,6 +1944,44 @@
   </style>
 </head>
 <body>
+  <svg class="sr-only" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="bronze-medal-fill" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffe0ac"></stop>
+        <stop offset="0.4" stop-color="#d68147"></stop>
+        <stop offset="0.72" stop-color="#a9562b"></stop>
+        <stop offset="1" stop-color="#f2bd80"></stop>
+      </linearGradient>
+      <linearGradient id="gold-medal-fill" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fff5ac"></stop>
+        <stop offset="0.42" stop-color="#f7cb3c"></stop>
+        <stop offset="0.72" stop-color="#e39a0c"></stop>
+        <stop offset="1" stop-color="#ffe985"></stop>
+      </linearGradient>
+    </defs>
+    <symbol id="bronze-medal-icon" viewBox="0 0 28 28">
+      <path d="M5 1h6l3 12-4 2L6 4z" fill="#526c9a"></path>
+      <path d="M17 1h6l-5 14-4-2z" fill="#86a4c6"></path>
+      <circle cx="14" cy="19" r="8.5" fill="#8e4826"></circle>
+      <circle cx="14" cy="19" r="7" fill="url(#bronze-medal-fill)" stroke="#f8d3a2" stroke-width="1"></circle>
+      <path d="m14 13.8 1.55 3.1 3.45.5-2.5 2.4.6 3.4-3.1-1.6-3.1 1.6.6-3.4-2.5-2.4 3.45-.5z" fill="#fff1d2"></path>
+      <path d="M8.6 17.3a6 6 0 0 1 5.2-4.1" fill="none" stroke="#fff8e9" stroke-width="1.2" stroke-linecap="round" opacity=".9"></path>
+      <path d="M23 7v3m-1.5-1.5h3" fill="none" stroke="#da9a5f" stroke-width="1.3" stroke-linecap="round"></path>
+    </symbol>
+    <symbol id="gold-medal-icon" viewBox="0 0 28 28">
+      <path d="M5 1h6l3 12-4 2L6 4z" fill="#4e6796"></path>
+      <path d="M17 1h6l-5 14-4-2z" fill="#9cb7d5"></path>
+      <circle cx="14" cy="19" r="8.5" fill="#b77a10"></circle>
+      <circle cx="14" cy="19" r="7" fill="url(#gold-medal-fill)" stroke="#fff1a1" stroke-width="1"></circle>
+      <path d="m14 13.8 1.55 3.1 3.45.5-2.5 2.4.6 3.4-3.1-1.6-3.1 1.6.6-3.4-2.5-2.4 3.45-.5z" fill="#fffce5"></path>
+      <path d="M8.6 17.3a6 6 0 0 1 5.2-4.1" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round"></path>
+      <path d="M23 7v3m-1.5-1.5h3" fill="none" stroke="#f4c126" stroke-width="1.4" stroke-linecap="round"></path>
+    </symbol>
+    <symbol id="news-icon" viewBox="0 0 24 24">
+      <path d="M4 3h14a2 2 0 0 1 2 2v13h1V8h2v10a4 4 0 0 1-4 4H5a4 4 0 0 1-4-4V6a3 3 0 0 1 3-3Z"></path>
+      <path d="M5 7h10v2H5zm0 4h5v5H5zm7 0h4v2h-4zm0 3h4v2h-4zM5 18h11v1H5z" fill="#fff"></path>
+    </symbol>
+  </svg>
   <div class="site-layout">
     <aside class="profile-sidebar" aria-label="Personal information">
       <img class="sidebar-pine" src="assets/六朝松.svg" alt="" aria-hidden="true">
@@ -1848,7 +1989,7 @@
         <img class="hero-lockup" src="assets/东南大学彩色中英文字校标组合-左右.svg" alt="Southeast University">
         <div class="portrait-wrap">
           <figure class="portrait-panel">
-            <img class="portrait" src="assets/profile.jpg" alt="Portrait of Ruiyang Huang">
+            <img class="portrait" src="assets/噜噜.jpg" alt="Portrait of Ruiyang Huang">
             <figcaption class="portrait-caption">
               <img class="school-mark" src="assets/东南大学彩色校标.svg" alt="Southeast University emblem">
             </figcaption>
@@ -1922,42 +2063,54 @@
               </p>
               <h3 class="study-heading" id="study-title">Study Experience</h3>
               <div class="bio-path" aria-labelledby="study-title">
-                <a class="bio-path-item" href="https://med.seu.edu.cn/" target="_blank" rel="noreferrer" title="School of Medicine, Southeast University">
+                <div class="bio-path-item">
                   <strong class="study-date">2022–2023</strong>
                   <img class="study-logo" src="assets/医学院logo.webp" alt="Southeast University School of Medicine logo" width="64" height="64" loading="lazy" decoding="async">
                   <div class="study-details">
-                    <strong class="study-university">Southeast University</strong>
-                    <span class="study-school">School of Medicine</span>
-                    <span class="study-degree">Medical Imaging</span>
+                    <a class="study-school-link" href="https://med.seu.edu.cn/" target="_blank" rel="noreferrer" title="School of Medicine, Southeast University">
+                      <strong class="study-university">Southeast University</strong>
+                      <span class="study-school">School of Medicine</span>
+                      <span class="study-degree">B.Med. Medical Imaging</span>
+                    </a>
+                    <div class="study-mentors">Mentor: <a href="https://med.seu.edu.cn/34336/list.htm" target="_blank" rel="noreferrer" title="Bo Xie, Southeast University School of Medicine">Bo Xie</a></div>
                   </div>
-                </a>
-                <a class="bio-path-item" href="https://math.seu.edu.cn/" target="_blank" rel="noreferrer" title="School of Mathematics, Southeast University">
+                </div>
+                <div class="bio-path-item">
                   <strong class="study-date">2023–2024</strong>
                   <img class="study-logo" src="assets/数学学院logo.jpg" alt="Southeast University School of Mathematics logo" width="64" height="64" loading="lazy" decoding="async">
                   <div class="study-details">
-                    <strong class="study-university">Southeast University</strong>
-                    <span class="study-school">School of Mathematics</span>
-                    <span class="study-degree">Science Experimental Class</span>
+                    <a class="study-school-link" href="https://math.seu.edu.cn/" target="_blank" rel="noreferrer" title="School of Mathematics, Southeast University">
+                      <strong class="study-university">Southeast University</strong>
+                      <span class="study-school">School of Mathematics</span>
+                      <span class="study-degree">B.Sc. Science Experimental Class</span>
+                    </a>
+                    <div class="study-mentors">Mentors: <a href="https://math.seu.edu.cn/xwy_2304/list.htm" target="_blank" rel="noreferrer" title="Wenying Xu, Southeast University School of Mathematics">Wenying Xu</a> · <a href="https://automation.seu.edu.cn/wgh/list.htm" target="_blank" rel="noreferrer" title="Guanghui Wen, Southeast University School of Mathematics">Guanghui Wen</a></div>
                   </div>
-                </a>
-                <a class="bio-path-item" href="https://cyber.seu.edu.cn/" target="_blank" rel="noreferrer" title="School of Cyber Science and Engineering, Southeast University">
+                </div>
+                <div class="bio-path-item">
                   <strong class="study-date">2024–2027</strong>
                   <img class="study-logo" src="assets/网络空间安全学院logo.jpg" alt="Southeast University School of Cyber Science and Engineering logo" width="64" height="64" loading="lazy" decoding="async">
                   <div class="study-details">
-                    <strong class="study-university">Southeast University</strong>
-                    <span class="study-school">School of Cyber Science and Engineering</span>
-                    <span class="study-degree">Bach. Eng. Cryptography Science and Technology</span>
+                    <a class="study-school-link" href="https://cyber.seu.edu.cn/" target="_blank" rel="noreferrer" title="School of Cyber Science and Engineering, Southeast University">
+                      <strong class="study-university">Southeast University</strong>
+                      <span class="study-school">School of Cyber Science and Engineering</span>
+                      <span class="study-degree">B.Eng. Cryptography Science and Technology</span>
+                    </a>
+                    <div class="study-mentors">Mentor: <a href="https://cyber.seu.edu.cn/gn/list.htm" target="_blank" rel="noreferrer" title="Ning Gao, Southeast University School of Cyber Science and Engineering">Ning Gao</a></div>
                   </div>
-                </a>
-                <a class="bio-path-item" href="https://ss.pku.edu.cn/" target="_blank" rel="noreferrer" title="School of Software and Microelectronics, Peking University">
+                </div>
+                <div class="bio-path-item">
                   <strong class="study-date">From Sep. 2027</strong>
                   <img class="study-logo" src="assets/标志_红色.png" alt="Peking University logo" width="64" height="64" loading="lazy" decoding="async">
                   <div class="study-details">
-                    <strong class="study-university">Peking University</strong>
-                    <span class="study-school">School of Software and Microelectronics</span>
-                    <span class="study-degree">PhD. Eng. Software Engineering</span>
+                    <a class="study-school-link" href="https://ss.pku.edu.cn/" target="_blank" rel="noreferrer" title="School of Software and Microelectronics, Peking University">
+                      <strong class="study-university">Peking University</strong>
+                      <span class="study-school">School of Software and Microelectronics</span>
+                      <span class="study-degree">Ph.D. Software Engineering</span>
+                    </a>
+                    <div class="study-mentors">Ph.D Advisor: <a href="https://ss.pku.edu.cn/sztd/xssbsz/cd38cb490d9648ba863cffea67a1a941.htm" target="_blank" rel="noreferrer" title="Ying Li, Peking University School of Software and Microelectronics">Ying Li</a></div>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -2004,65 +2157,63 @@
       <div class="shell">
         <div class="section-head">
           <div>
-            <div class="kicker">HIGHLIGHTS</div>
+            <div class="kicker">UPDATES</div>
             <h2>Recent Highlights</h2>
           </div>
         </div>
-        <div class="highlight-window" aria-label="Recent highlights carousel" tabindex="0">
+        <div class="highlight-window" aria-label="News" tabindex="0">
           <div class="highlight-grid">
+            <a class="highlight" href="https://mp.weixin.qq.com/s/7wNtTySFWWRD-j2LR1QgJQ" target="_blank" rel="noreferrer">
+              <time datetime="2026-09">2026/09</time>
+              <p><span class="highlight-name">AudioPG</span> featured by <strong>CAAI Member Center</strong>.</p>
+            </a>
+            <a class="highlight" href="https://mp.weixin.qq.com/s/vqeVAOIZlTuDly39C6RiPA" target="_blank" rel="noreferrer">
+              <time datetime="2026-08">2026/08</time>
+              <p><span class="highlight-name">RefineCut</span> covered by <strong>QbitAI</strong>.</p>
+            </a>
+            <a class="highlight" href="https://mp.weixin.qq.com/s/sXilINcNk4Cy4AQ4_LgXeA" target="_blank" rel="noreferrer">
+              <time datetime="2026-08">2026/08</time>
+              <p><span class="highlight-name">PRP</span> featured by <strong>Affective Computing</strong>.</p>
+            </a>
             <a class="highlight" href="https://arxiv.org/abs/2608.25622" target="_blank" rel="noreferrer">
-              <span class="tag">2026 · <i class="venue-name">EMNLP</i></span>
-              <h3>Plans You Can Check</h3>
-              <p>Accepted. Co-first author.</p>
+              <time datetime="2026-08">2026/08</time>
+              <p><span class="highlight-name">RefineCut</span> accepted to <strong><i class="venue-name">EMNLP 2026</i></strong>.</p>
             </a>
             <a class="highlight" href="https://arxiv.org/abs/2605.28214" target="_blank" rel="noreferrer">
-              <span class="tag">2026 · <i class="venue-name">EMNLP</i></span>
-              <h3>Out of Sight, Not Out of Mind</h3>
-              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
-              <p>Accepted. Co-first author.</p>
+              <time datetime="2026-08">2026/08</time>
+              <p><span class="highlight-name">Out of Sight, Not out of Mind</span> accepted to <strong><i class="venue-name">EMNLP 2026</i></strong> (oral).</p>
             </a>
             <a class="highlight" href="#pub-causal-abstention">
-              <span class="tag">2026 · <i class="venue-name">EMNLP</i></span>
-              <h3>Causal Abstention</h3>
-              <div class="paper-badges"><span class="paper-badge oral">Oral</span><span class="paper-badge award">Award Nomination</span></div>
-              <p>Accepted. Co-first author.</p>
+              <time datetime="2026-08">2026/08</time>
+              <p><span class="highlight-name">CARL</span> accepted to <strong><i class="venue-name">EMNLP 2026</i></strong> (oral, award-nominated).</p>
             </a>
             <a class="highlight" href="https://arxiv.org/abs/2511.14684" target="_blank" rel="noreferrer">
-              <span class="tag coral">2026 · <i class="venue-name">EMNLP Findings</i></span>
-              <h3>SMRC</h3>
-              <p>Accepted to Findings. Aligning language models with student reasoning for mathematical error correction.</p>
+              <time datetime="2026-08">2026/08</time>
+              <p><span class="highlight-name">SMRC</span> accepted to <strong><i class="venue-name">Findings of EMNLP 2026</i></strong>.</p>
             </a>
             <a class="highlight" href="#publications">
-              <span class="tag coral">2026 · <i class="venue-name">ACL Findings</i></span>
-              <h3>TopoSHIELD</h3>
-              <p>Risk-aware topological evolution for disrupting malicious information flow in multi-agent systems.</p>
-            </a>
-            <a class="highlight" href="#publications">
-              <span class="tag gold">2026 · <i class="venue-name">ICML</i></span>
-              <h3>EvoC2F</h3>
-              <p>Compiling tool orchestration for efficient and evolvable large language model agents.</p>
-            </a>
-            <a class="highlight" href="https://doi.org/10.1109/TVT.2026.3658329" target="_blank" rel="noreferrer">
-              <span class="tag blue">2026 · <i class="venue-name">IEEE T-VT</i></span>
-              <h3>HECC Authentication for UAV SAR Networks</h3>
-              <p>A robust authentication and key agreement scheme for UAV-enabled search and rescue networks.</p>
-            </a>
-            <a class="highlight" href="https://doi.org/10.1109/ICASSP55912.2026.11463151" target="_blank" rel="noreferrer">
-              <span class="tag">2026 · <i class="venue-name">ICASSP</i></span>
-              <h3>STAR-RFF</h3>
-              <p>Spatio-temporal sensing assisted radio-frequency fingerprint identification via STGCN.</p>
+              <time datetime="2026-04">2026/04</time>
+              <p><span class="highlight-name">EvoC2F</span> accepted to <strong><i class="venue-name">ICML 2026</i></strong>.</p>
             </a>
             <a class="highlight" href="https://doi.org/10.1145/3805622.3810789" target="_blank" rel="noreferrer">
-              <span class="tag blue">2026 · <i class="venue-name">ICMR</i></span>
-              <h3>Audio Learning with Synthetic Pre-training</h3>
-              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
-              <p>Procedural generation for synthetic pre-training and audio representation learning.</p>
+              <time datetime="2026-04">2026/04</time>
+              <p><span class="highlight-name">AudioPG</span> accepted to <strong><i class="venue-name">ICMR 2026</i></strong> (oral).</p>
+            </a>
+            <a class="highlight" href="#publications">
+              <time datetime="2026-04">2026/04</time>
+              <p><span class="highlight-name">TopoSHIELD</span> accepted to <strong><i class="venue-name">Findings of ACL 2026</i></strong>.</p>
+            </a>
+            <a class="highlight" href="https://doi.org/10.1109/TVT.2026.3658329" target="_blank" rel="noreferrer">
+              <time datetime="2026-01">2026/01</time>
+              <p><span class="highlight-name">HECC AKA</span> published in <strong><i class="venue-name">IEEE T-VT 2026</i></strong>.</p>
+            </a>
+            <a class="highlight" href="https://doi.org/10.1109/ICASSP55912.2026.11463151" target="_blank" rel="noreferrer">
+              <time datetime="2026-01">2026/01</time>
+              <p><span class="highlight-name">STAR-RFF</span> accepted to <strong><i class="venue-name">ICASSP 2026</i></strong>.</p>
             </a>
             <a class="highlight" href="https://doi.org/10.1007/978-981-96-9921-6_39" target="_blank" rel="noreferrer">
-              <span class="tag gold">2025 · <i class="venue-name">ICIC</i></span>
-              <h3>Spherical Vector Particle Swarm Optimization</h3>
-              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
-              <p>Smooth path planning based on spherical vector particle swarm optimization.</p>
+              <time datetime="2025-07">2025/07</time>
+              <p><span class="highlight-name">Spherical Vector PSO</span> published in <strong><i class="venue-name">ICIC 2025</i></strong> (oral).</p>
             </a>
           </div>
         </div>
@@ -2124,14 +2275,10 @@
         </div>
         <div class="publication-window" aria-label="Publication list" tabindex="0">
           <div class="publication-list">
-          <article class="publication publication-with-code" id="pub-tvt" aria-labelledby="pub-tvt-title">
+          <article class="publication publication-with-links" id="pub-tvt" aria-labelledby="pub-tvt-title">
             <div class="publication-meta">
               <span class="venue">IEEE T-VT</span>
               <span class="rank sci">JCR Q1</span>
-              <a class="publication-code" href="https://github.com/NoWall-572/NS-3_Communication_Simulation_for_AKAs" target="_blank" rel="noreferrer" aria-label="Code repository for HECC Authentication" title="GitHub: NoWall-572/NS-3_Communication_Simulation_for_AKAs">
-                <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
-                <span>CODE</span>
-              </a>
             </div>
             <div>
               <h3 id="pub-tvt-title"><a class="publication-link" href="https://doi.org/10.1109/TVT.2026.3658329" target="_blank" rel="noreferrer">A Robust HECC-based Authentication and Key Agreement for UAV-enabled SAR Networks</a></h3>
@@ -2140,36 +2287,40 @@
               <p class="doi"><b>DOI:</b> 10.1109/TVT.2026.3658329</p>
             </div>
           </article>
-          <article class="publication publication-with-code" id="pub-toposhield" aria-labelledby="pub-toposhield-title">
+          <article class="publication publication-with-links" id="pub-toposhield" aria-labelledby="pub-toposhield-title">
             <div class="publication-meta">
               <span class="venue">ACL '26</span>
               <span class="rank ccf-a">Findings</span>
-              <a class="publication-code" href="https://github.com/NoWall-572/TopoSHIELD" target="_blank" rel="noreferrer" aria-label="Code repository for TopoSHIELD" title="GitHub: NoWall-572/TopoSHIELD">
-                <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
-                <span>CODE</span>
-              </a>
             </div>
             <div>
               <h3 id="pub-toposhield-title"><a class="publication-link" href="https://doi.org/10.18653/v1/2026.findings-acl.426" target="_blank" rel="noreferrer">TopoSHIELD: Reshaping the Flow of Malice via Spatio-Temporal Risk-Aware Topological Evolution in Multi-Agent Systems</a></h3>
               <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>†, Chenxi Wang†, Tinghe Zhang, Fengrui Liu, Jiayan Sun, Haocheng Wang, and Yifan Wu✉ · First Author</p>
               <p><i class="venue-name">Findings of the Association for Computational Linguistics: ACL 2026</i> · Published.</p>
               <p class="doi"><b>DOI:</b> 10.18653/V1/2026.FINDINGS-ACL.426</p>
+              <div class="publication-actions">
+                <a class="publication-code" href="https://github.com/NoWall-572/TopoSHIELD" target="_blank" rel="noreferrer" aria-label="Code repository for TopoSHIELD" title="GitHub: NoWall-572/TopoSHIELD">
+                  <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
+                  <span>CODE</span><span class="publication-stars" data-repo="NoWall-572/TopoSHIELD" title="GitHub stars"><span class="star-glyph" aria-hidden="true">★</span><span class="star-count" aria-hidden="true">--</span></span>
+                </a>
+              </div>
             </div>
           </article>
-          <article class="publication publication-with-code" id="pub-star-rff" aria-labelledby="pub-star-rff-title">
+          <article class="publication publication-with-links" id="pub-star-rff" aria-labelledby="pub-star-rff-title">
             <div class="publication-meta">
               <span class="venue">ICASSP '26</span>
               <span class="rank ccf-b">CCF-B</span>
-              <a class="publication-code" href="https://github.com/NoWall-572/BFI-Acquisition-Tutorial" target="_blank" rel="noreferrer" aria-label="Code repository for STAR-RFF" title="GitHub: NoWall-572/BFI-Acquisition-Tutorial">
-                <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
-                <span>CODE</span>
-              </a>
             </div>
             <div>
               <h3 id="pub-star-rff-title"><a class="publication-link" href="https://doi.org/10.1109/ICASSP55912.2026.11463151" target="_blank" rel="noreferrer">STAR-RFF: Spatio-Temporal Sensing Assisted Robust Radio Frequency Fingerprint Identification Via STGCN</a></h3>
               <p class="authors"><b>Authors:</b> <u>Ruiyang Huang</u>†, Chaoyue Yang†, Like Ren, Fengrui Liu, Yifan Wu, Ning Gao✉, Shi Jin · First Author</p>
               <p><i class="venue-name">IEEE International Conference on Acoustics, Speech, and Signal Processing</i> · Published.</p>
               <p class="doi"><b>DOI:</b> 10.1109/ICASSP55912.2026.11463151</p>
+              <div class="publication-actions">
+                <a class="publication-code" href="https://github.com/NoWall-572/BFI-Acquisition-Tutorial" target="_blank" rel="noreferrer" aria-label="Tutorial for STAR-RFF" title="GitHub: NoWall-572/BFI-Acquisition-Tutorial">
+                  <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
+                  <span>TUTORIAL</span><span class="publication-stars" data-repo="NoWall-572/BFI-Acquisition-Tutorial" title="GitHub stars"><span class="star-glyph" aria-hidden="true">★</span><span class="star-count" aria-hidden="true">--</span></span>
+                </a>
+              </div>
             </div>
           </article>
           <a class="publication" href="https://icml.cc/virtual/2026/poster/63166" target="_blank" rel="noreferrer">
@@ -2188,10 +2339,10 @@
             <div class="publication-meta">
               <span class="venue">EMNLP '26</span>
               <span class="rank ccf-b">CCF-B</span>
+              <div class="paper-badges"><span class="paper-badge oral"><svg class="medal-icon" aria-hidden="true"><use href="#bronze-medal-icon"></use></svg>Oral</span></div>
             </div>
             <div>
               <h3>Out of Sight, Not Out of Mind: Unveiling Latent Attack in Latent-based Multi-Agent Systems</h3>
-              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
               <p class="authors"><b>Authors:</b> Chenxi Wang<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, <u>Ruiyang Huang</u><sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Jiayan Sun<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Lei Wei<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Yifan Wu<sup title="Corresponding author" aria-label="Corresponding author">✉</sup> · Co-first Author</p>
               <p><i class="venue-name">Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing</i> · Accepted & Preprinted.</p>
               <p class="doi"><b>arXiv:</b> 2605.28214</p>
@@ -2201,55 +2352,73 @@
             <div class="publication-meta">
               <span class="venue">EMNLP '26</span>
               <span class="rank ccf-b">CCF-B</span>
+              <div class="paper-badges">
+                <span class="paper-badge oral"><svg class="medal-icon" aria-hidden="true"><use href="#bronze-medal-icon"></use></svg>Oral</span>
+                <span class="paper-badge award"><svg class="medal-icon" aria-hidden="true"><use href="#gold-medal-icon"></use></svg>Award Nomination</span>
+              </div>
             </div>
             <div>
               <h3 id="causal-abstention-title">Causal Abstention for Cost-Aware Language-Agent Collaboration</h3>
-              <div class="paper-badges"><span class="paper-badge oral">Oral</span><span class="paper-badge award">Award Nomination</span></div>
               <p class="authors"><b>Authors:</b> Lei Wei<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, <u>Ruiyang Huang</u><sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Zhaolu Kang<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Qi Liu<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Xiao Peng, Haoran Liu, Zonghao Ying, Haoyu Wang, Ye Shen, Xu Dong, Hongyu Li, Kesu Wang, Yukun Lian, Sicong Xie<sup title="Corresponding author" aria-label="Corresponding author">✉</sup> · Co-first Author</p>
               <p><i class="venue-name">Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing</i> · Accepted.</p>
               <p class="doi">Paper link forthcoming.</p>
             </div>
           </article>
-          <a class="publication" id="pub-plans-you-can-check" href="https://arxiv.org/abs/2608.25622" target="_blank" rel="noreferrer">
+          <article class="publication publication-with-links" id="pub-plans-you-can-check" aria-labelledby="pub-plans-you-can-check-title">
             <div class="publication-meta">
               <span class="venue">EMNLP '26</span>
               <span class="rank ccf-b">CCF-B</span>
             </div>
             <div>
-              <h3>Plans You Can Check: Verifier-Grounded Learning of an Open-Weight Planner for Executable Video-Editing</h3>
+              <h3 id="pub-plans-you-can-check-title"><a class="publication-link" href="https://arxiv.org/abs/2608.25622" target="_blank" rel="noreferrer">Plans You Can Check: Verifier-Grounded Learning of an Open-Weight Planner for Executable Video-Editing</a></h3>
               <p class="authors"><b>Authors:</b> Haoyu Wang<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Cheng Feng<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Liuyang Bian<sup title="Equal contribution" aria-label="Equal contribution">†</sup>, <u>Ruiyang Huang</u><sup title="Equal contribution" aria-label="Equal contribution">†</sup>, Lei Wei, Yafei Wen, Xiaoxin Chen, Xiaoying Tang<sup title="Corresponding author" aria-label="Corresponding author">✉</sup> · Co-first Author</p>
               <p><i class="venue-name">Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing</i> · Accepted & Preprinted.</p>
               <p class="doi"><b>arXiv:</b> 2608.25622</p>
+              <div class="publication-actions">
+                <a class="publication-press" href="https://mp.weixin.qq.com/s/vqeVAOIZlTuDly39C6RiPA" target="_blank" rel="noreferrer" title="Media coverage by QbitAI">
+                  <svg aria-hidden="true"><use href="#news-icon"></use></svg><span>量子位</span>
+                </a>
+              </div>
             </div>
-          </a>
-          <a class="publication" id="pub-prp" href="https://doi.org/10.1109/TASLPRO.2026.3724415" target="_blank" rel="noreferrer">
+          </article>
+          <article class="publication publication-with-links" id="pub-prp" aria-labelledby="pub-prp-title">
             <div class="publication-meta">
               <span class="venue">IEEE T-ASLP</span>
               <span class="rank sci">JCR Q1</span>
               <span class="rank ccf-b">CCF-B</span>
             </div>
             <div>
-              <h3>PRP: Procedural-to-Real Masked Pre-Training for Transferable and Interpretable Audio Representations</h3>
+              <h3 id="pub-prp-title"><a class="publication-link" href="https://doi.org/10.1109/TASLPRO.2026.3724415" target="_blank" rel="noreferrer">PRP: Procedural-to-Real Masked Pre-Training for Transferable and Interpretable Audio Representations</a></h3>
               <p class="authors"><b>Authors:</b> Fengrui Liu, <u>Ruiyang Huang</u>, Qijian Zheng, Yuanfang Wang, Feng Liu<sup title="Corresponding author" aria-label="Corresponding author">✉</sup> · Second Author</p>
               <p><i class="venue-name">IEEE Transactions on Audio, Speech and Language Processing</i> · Published.</p>
               <p class="doi"><b>DOI:</b> 10.1109/TASLPRO.2026.3724415</p>
+              <div class="publication-actions">
+                <a class="publication-press" href="https://mp.weixin.qq.com/s/sXilINcNk4Cy4AQ4_LgXeA" target="_blank" rel="noreferrer" title="Media coverage by 情感计算Affective Computing">
+                  <svg aria-hidden="true"><use href="#news-icon"></use></svg><span>情感计算</span>
+                </a>
+              </div>
             </div>
-          </a>
-          <article class="publication publication-with-code" id="pub-audiopg" aria-labelledby="pub-audiopg-title">
+          </article>
+          <article class="publication publication-with-links" id="pub-audiopg" aria-labelledby="pub-audiopg-title">
             <div class="publication-meta">
               <span class="venue">ICMR '26</span>
               <span class="rank ccf-b">CCF-B</span>
-              <a class="publication-code" href="https://github.com/Freyliu0516/audioPG" target="_blank" rel="noreferrer" aria-label="Code repository for Audio Learning with Synthetic Pre-training" title="GitHub: Freyliu0516/audioPG">
-                <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
-                <span>CODE</span>
-              </a>
+              <div class="paper-badges"><span class="paper-badge oral"><svg class="medal-icon" aria-hidden="true"><use href="#bronze-medal-icon"></use></svg>Oral</span></div>
             </div>
             <div>
               <h3 id="pub-audiopg-title"><a class="publication-link" href="https://doi.org/10.1145/3805622.3810789" target="_blank" rel="noreferrer">From Physics to Representation: Audio Learning with Synthetic Pre-training via Procedural Generation</a></h3>
-              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
               <p class="authors"><b>Authors:</b> Fengrui Liu, <u>Ruiyang Huang</u>, Qijian Zheng, Yuanfang Wang, Feng Liu✉ · Second Author</p>
               <p><i class="venue-name">Proceedings of the 2026 International Conference on Multimedia Retrieval</i> · Published.</p>
               <p class="doi"><b>DOI:</b> 10.1145/3805622.3810789</p>
+              <div class="publication-actions">
+                <a class="publication-code" href="https://github.com/Freyliu0516/audioPG" target="_blank" rel="noreferrer" aria-label="Code repository for Audio Learning with Synthetic Pre-training" title="GitHub: Freyliu0516/audioPG">
+                  <img src="assets/icons/github.svg" alt="" aria-hidden="true" width="19" height="19">
+                  <span>CODE</span><span class="publication-stars" data-repo="Freyliu0516/audioPG" title="GitHub stars"><span class="star-glyph" aria-hidden="true">★</span><span class="star-count" aria-hidden="true">--</span></span>
+                </a>
+                <a class="publication-press" href="https://mp.weixin.qq.com/s/7wNtTySFWWRD-j2LR1QgJQ" target="_blank" rel="noreferrer" title="Media coverage by CAAI会员中心">
+                  <svg aria-hidden="true"><use href="#news-icon"></use></svg><span>CAAI会员中心</span>
+                </a>
+              </div>
             </div>
           </article>
           <a class="publication" id="pub-smrc" href="https://arxiv.org/abs/2511.14684" target="_blank" rel="noreferrer">
@@ -2268,10 +2437,10 @@
             <div class="publication-meta">
               <span class="venue">ICIC '25</span>
               <span class="rank ccf-c">CCF-C</span>
+              <div class="paper-badges"><span class="paper-badge oral"><svg class="medal-icon" aria-hidden="true"><use href="#bronze-medal-icon"></use></svg>Oral</span></div>
             </div>
             <div>
               <h3>Smooth Path Planning Based on Spherical Vector Particle Swarm Optimization</h3>
-              <div class="paper-badges"><span class="paper-badge oral">Oral</span></div>
               <p class="authors"><b>Authors:</b> Wenting Su, Zixuan Liu✉, <u>Ruiyang Huang</u> · Third Author</p>
               <p><i class="venue-name">Advanced Intelligent Computing Technology and Applications</i> · Published.</p>
               <p class="doi"><b>DOI:</b> 10.1007/978-981-96-9921-6_39</p>
@@ -2435,6 +2604,20 @@
         }
         document.fonts.ready.then(resizePublicationWindow);
       }
+
+      document.querySelectorAll(".publication-stars").forEach(async (badge) => {
+        try {
+          const response = await fetch(`https://img.shields.io/github/stars/${badge.dataset.repo}?style=flat-square`);
+          if (!response.ok) throw new Error("Star badge unavailable");
+          const svg = new DOMParser().parseFromString(await response.text(), "image/svg+xml");
+          const count = svg.querySelector('a[href$="/stargazers"] text')?.textContent.trim();
+          if (!/^\d+(?:[.,]\d+)?[kKmM]?$/.test(count || "")) throw new Error("Invalid star count");
+          badge.querySelector(".star-count").textContent = count;
+          badge.title = `${count} GitHub stars`;
+        } catch {
+          badge.title = "GitHub star count unavailable";
+        }
+      });
 
       const scrollToHash = (hash, behavior = "auto") => {
         if (!hash || hash === "#") return;
