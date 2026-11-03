@@ -1,5 +1,10 @@
 # Icon Sources
 
+- `acl-anthology.svg`: Lucide book-open, ISC license; rendered in red.
+  https://github.com/lucide-icons/lucide/blob/main/icons/book-open.svg
+- `dblp.svg` and `semantic-scholar.svg`: Simple Icons, CC0-1.0; brand colors.
+  https://github.com/simple-icons/simple-icons/blob/develop/icons/dblp.svg
+  https://github.com/simple-icons/simple-icons/blob/develop/icons/semanticscholar.svg
 - `graduation-cap.svg`: Lucide graduation-cap, ISC license.
   https://github.com/lucide-icons/lucide/blob/main/icons/graduation-cap.svg
 - `github.svg`: GitHub Octicons mark-github-24, MIT license.
